@@ -1,0 +1,2731 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>سامانه برنامه‌ریزی، جلسات، تست و چت مشاور</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Vazirmatn', 'Tahoma', 'sans-serif'],
+          },
+          colors: {
+            darkbg: {
+              950: '#070b14',
+              900: '#0f172a',
+              850: '#131d33',
+              800: '#1e293b',
+              700: '#334155',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html, body {
+      font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+      background-color: #070b14;
+      color: #ffffff;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    .num-xl {
+      color: #ffffff;
+      font-size: 1.9rem;
+      font-weight: 900;
+      line-height: 1.2;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .num-lg {
+      color: #ffffff;
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.25;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .num-md {
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .subtext-lg {
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.7;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    input[type="date"],
+    select,
+    textarea {
+      color: #ffffff;
+    }
+
+    input[type="number"] {
+      font-size: 1.12rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* حالت روشن */
+    body.light-mode {
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+
+    body.light-mode .bg-darkbg-950 {
+      background-color: #f8fafc;
+    }
+
+    body.light-mode .bg-darkbg-900,
+    body.light-mode .bg-darkbg-900\/95,
+    body.light-mode .bg-darkbg-900\/80 {
+      background-color: #ffffff;
+    }
+
+    body.light-mode .bg-darkbg-850 {
+      background-color: #f1f5f9;
+    }
+
+    body.light-mode .bg-darkbg-800 {
+      background-color: #e2e8f0;
+    }
+
+    body.light-mode .border-darkbg-800,
+    body.light-mode .border-darkbg-700,
+    body.light-mode .border-darkbg-600 {
+      border-color: #cbd5e1;
+    }
+
+    body.light-mode h1,
+    body.light-mode h2,
+    body.light-mode h3,
+    body.light-mode h4,
+    body.light-mode label,
+    body.light-mode .text-white {
+      color: #0f172a;
+    }
+
+    body.light-mode .num-xl,
+    body.light-mode .num-lg,
+    body.light-mode .num-md,
+    body.light-mode .subtext-lg {
+      color: #0f172a;
+    }
+
+    body.light-mode input[type="number"],
+    body.light-mode input[type="text"],
+    body.light-mode input[type="date"],
+    body.light-mode select,
+    body.light-mode textarea {
+      color: #0f172a;
+    }
+
+    body.light-mode button.bg-indigo-600,
+    body.light-mode button.bg-emerald-600,
+    body.light-mode button.bg-sky-600,
+    body.light-mode button.bg-amber-600,
+    body.light-mode button.bg-rose-600,
+    body.light-mode button.bg-violet-600,
+    body.light-mode button.bg-cyan-600,
+    body.light-mode button.bg-fuchsia-600,
+    body.light-mode button[class*="from-"],
+    body.light-mode span.bg-indigo-600,
+    body.light-mode span.bg-emerald-600,
+    body.light-mode span.bg-sky-600,
+    body.light-mode span.bg-amber-600,
+    body.light-mode span.bg-rose-600,
+    body.light-mode span.bg-violet-600,
+    body.light-mode span.bg-cyan-600,
+    body.light-mode span.bg-fuchsia-600,
+    body.light-mode span[class*="from-"],
+    body.light-mode div.bg-indigo-600,
+    body.light-mode div.bg-emerald-600,
+    body.light-mode div.bg-sky-600,
+    body.light-mode div.bg-amber-600,
+    body.light-mode div.bg-violet-600,
+    body.light-mode div.bg-cyan-600,
+    body.light-mode div[class*="from-"],
+    body.light-mode #toastRoot > div {
+      color: #ffffff;
+    }
+
+    body.light-mode button.bg-indigo-600 .num-md,
+    body.light-mode button.bg-emerald-600 .num-md,
+    body.light-mode button.bg-sky-600 .num-md,
+    body.light-mode button.bg-amber-600 .num-md,
+    body.light-mode button.bg-violet-600 .num-md,
+    body.light-mode div.bg-indigo-600 .num-lg,
+    body.light-mode div.bg-emerald-600 .num-lg,
+    body.light-mode div.bg-sky-600 .num-lg,
+    body.light-mode div.bg-amber-600 .num-lg,
+    body.light-mode div.bg-violet-600 .num-lg,
+    body.light-mode div.bg-cyan-600 .num-lg {
+      color: #ffffff;
+    }
+
+    body.light-mode .kpi-card-colorful .num-xl,
+    body.light-mode .kpi-card-colorful .subtext-lg,
+    body.light-mode .chat-bubble-colorful .num-md,
+    body.light-mode .chat-bubble-colorful .subtext-lg {
+      color: #ffffff;
+    }
+
+    body.light-mode ::-webkit-scrollbar-track {
+      background: #e2e8f0;
+    }
+    body.light-mode ::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 9999px;
+    }
+
+    @keyframes fadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .anim-fade {
+      animation: fadeSlide 0.2s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-darkbg-950 text-white min-h-screen flex flex-col selection:bg-fuchsia-500 selection:text-white">
+
+  <!-- اعلان‌های غیرمسدودکننده -->
+  <div id="toastRoot" class="fixed top-4 left-4 right-4 sm:left-6 sm:right-auto sm:w-96 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- هدر و نوار ناوبری اصلی -->
+  <header class="sticky top-0 z-40 bg-darkbg-900/95 backdrop-blur-md border-b border-indigo-500/30 shadow-xl">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3.5 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3">
+      <div class="flex items-center justify-between gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-fuchsia-500 via-indigo-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-fuchsia-500/25 shrink-0">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+
+        <!-- دکمه تغییر حالت روشن / تاریک -->
+        <button
+          type="button"
+          id="btnToggleTheme"
+          aria-label="تغییر حالت روشن و تاریک"
+          class="px-3.5 py-2 rounded-xl border border-amber-400/40 bg-gradient-to-l from-amber-600/30 to-rose-600/30 hover:from-amber-600/50 hover:to-rose-600/50 text-xs sm:text-sm font-extrabold text-white transition flex items-center gap-2 cursor-pointer shrink-0"
+        >
+          <span id="themeIcon">☀️</span>
+          <span id="themeLabel">حالت روشن</span>
+        </button>
+      </div>
+
+      <!-- ۵ تب اصلی ناوبری (plan, report, register, advisor, chat) -->
+      <nav id="mainNavContainer" aria-label="بخش‌های اصلی" class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+        <button
+          type="button"
+          data-main-tab="plan"
+          class="main-tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <span>۱. برنامه مطالعه</span>
+          <span id="navCountPlan" class="num-md bg-indigo-600 px-2 py-0.5 rounded-lg text-xs">0</span>
+        </button>
+
+        <button
+          type="button"
+          data-main-tab="report"
+          class="main-tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <span>۲. گزارش کار</span>
+          <span id="navCountReports" class="num-md bg-emerald-600 px-2 py-0.5 rounded-lg text-xs">0</span>
+        </button>
+
+        <button
+          type="button"
+          data-main-tab="register"
+          class="main-tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <span>۳. ثبت</span>
+          <span id="navCountReg" class="num-md bg-sky-600 px-2 py-0.5 rounded-lg text-xs">0</span>
+        </button>
+
+        <button
+          type="button"
+          data-main-tab="advisor"
+          class="main-tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <span>۴. اطلاعات دانش‌آموز</span>
+          <span id="navCountAdvisor" class="num-md bg-amber-600 px-2 py-0.5 rounded-lg text-xs">0</span>
+        </button>
+
+        <button
+          type="button"
+          data-main-tab="chat"
+          class="main-tab-btn col-span-2 sm:col-span-1 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <span>۵. چت</span>
+          <span id="navCountChat" class="num-md bg-fuchsia-600 px-2 py-0.5 rounded-lg text-xs">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- نوار آمار کلیدی بالا -->
+  <section class="max-w-7xl w-full mx-auto px-3 sm:px-6 pt-5">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+      <div class="kpi-card-colorful bg-gradient-to-br from-indigo-600 to-violet-700 border border-indigo-400/50 rounded-2xl p-4 shadow-lg shadow-indigo-950/40">
+        <div id="kpiPlanHours" class="num-xl">0</div>
+        <div class="subtext-lg mt-1">ساعت در برنامه مطالعه</div>
+      </div>
+
+      <div class="kpi-card-colorful bg-gradient-to-br from-cyan-600 to-sky-700 border border-cyan-400/50 rounded-2xl p-4 shadow-lg shadow-cyan-950/40">
+        <div id="kpiPlanTests" class="num-xl">0</div>
+        <div class="subtext-lg mt-1">تست برنامه‌ریزی‌شده</div>
+      </div>
+
+      <div class="kpi-card-colorful bg-gradient-to-br from-emerald-600 to-teal-700 border border-emerald-400/50 rounded-2xl p-4 shadow-lg shadow-emerald-950/40">
+        <div id="kpiReportHours" class="num-xl">0</div>
+        <div class="subtext-lg mt-1">ساعت مطالعه واقعی</div>
+      </div>
+
+      <div class="kpi-card-colorful bg-gradient-to-br from-amber-600 to-rose-600 border border-amber-400/50 rounded-2xl p-4 shadow-lg shadow-amber-950/40">
+        <div id="kpiReportAvg" class="num-xl">0%</div>
+        <div class="subtext-lg mt-1">میانگین درصد گزارش‌ها</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- محتوای اصلی صفحات -->
+  <main class="max-w-7xl w-full mx-auto px-3 sm:px-6 py-6 flex-1">
+
+    <!-- ===================================================================== -->
+    <!-- بخش ۱: برنامه مطالعه                                                  -->
+    <!-- ===================================================================== -->
+    <section id="tab-plan" class="main-tab-panel space-y-6 anim-fade">
+      <div class="bg-darkbg-900 border border-indigo-500/30 rounded-3xl p-4 sm:p-6 shadow-xl">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 pb-4 mb-5 border-b border-darkbg-700">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black text-white">برنامه مطالعه هفتگی و روزانه</h2>
+            <p class="subtext-lg mt-1">
+              آیتم‌های منتقل‌شده از اطلاعات دانش‌آموز و موارد ثبت‌شده در برنامه در این بخش نمایش داده می‌شوند.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <select
+              id="planDayFilter"
+              class="rounded-xl bg-darkbg-950 border border-cyan-500/40 px-3.5 py-2.5 text-sm font-extrabold text-white outline-none"
+            >
+              <option value="ALL">همه روزهای هفته</option>
+              <option value="شنبه">شنبه</option>
+              <option value="یک‌شنبه">یک‌شنبه</option>
+              <option value="دوشنبه">دوشنبه</option>
+              <option value="سه‌شنبه">سه‌شنبه</option>
+              <option value="چهارشنبه">چهارشنبه</option>
+              <option value="پنج‌شنبه">پنج‌شنبه</option>
+              <option value="جمعه">جمعه</option>
+            </select>
+
+            <button
+              type="button"
+              id="btnGoToStudentInfo"
+              class="px-4 py-2.5 rounded-xl bg-gradient-to-l from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white text-sm font-extrabold transition cursor-pointer shadow"
+            >
+              انتقال به اطلاعات دانش‌آموز ←
+            </button>
+          </div>
+        </div>
+
+        <!-- فرم افزودن دستی سریع به برنامه مطالعه -->
+        <form id="formAddManualPlan" class="bg-gradient-to-l from-indigo-950/40 via-darkbg-850 to-cyan-950/30 border border-indigo-500/30 rounded-2xl p-4 mb-6">
+          <div class="text-sm font-extrabold text-white mb-3">افزودن مورد جدید به برنامه مطالعه</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
+            <select id="manualPlanDay" class="rounded-xl bg-darkbg-950 border border-indigo-500/35 px-3 py-2.5 text-sm font-bold text-white outline-none">
+              <option value="شنبه">شنبه</option>
+              <option value="یک‌شنبه">یک‌شنبه</option>
+              <option value="دوشنبه">دوشنبه</option>
+              <option value="سه‌شنبه">سه‌شنبه</option>
+              <option value="چهارشنبه">چهارشنبه</option>
+              <option value="پنج‌شنبه">پنج‌شنبه</option>
+              <option value="جمعه">جمعه</option>
+            </select>
+
+            <select id="manualPlanKind" class="rounded-xl bg-darkbg-950 border border-cyan-500/35 px-3 py-2.5 text-sm font-bold text-white outline-none">
+              <option value="جلسه مطالعه">جلسه مطالعه</option>
+              <option value="تست‌زنی">تست‌زنی</option>
+            </select>
+
+            <select id="manualPlanSubject" class="rounded-xl bg-darkbg-950 border border-fuchsia-500/35 px-3 py-2.5 text-sm font-bold text-white outline-none">
+              <option value="زیست‌شناسی">زیست‌شناسی</option>
+              <option value="فیزیک">فیزیک</option>
+              <option value="شیمی">شیمی</option>
+              <option value="ریاضی">ریاضی</option>
+              <option value="زمین‌شناسی">زمین‌شناسی</option>
+              <option value="ادبیات فارسی">ادبیات فارسی</option>
+              <option value="عربی">عربی</option>
+              <option value="دین و زندگی">دین و زندگی</option>
+              <option value="زبان انگلیسی">زبان انگلیسی</option>
+            </select>
+
+            <input
+              id="manualPlanTitle"
+              type="text"
+              required
+              placeholder="عنوان برنامه"
+              class="rounded-xl bg-darkbg-950 border border-emerald-500/35 px-3 py-2.5 text-sm font-bold text-white outline-none"
+            />
+
+            <input
+              id="manualPlanAmount"
+              type="number"
+              step="0.5"
+              min="0.5"
+              value="3"
+              required
+              placeholder="مقدار"
+              class="rounded-xl bg-darkbg-950 border border-amber-500/35 px-3 py-2.5 outline-none"
+            />
+
+            <button
+              type="submit"
+              class="rounded-xl bg-gradient-to-l from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-sm py-2.5 px-4 transition cursor-pointer shadow"
+            >
+              + افزودن به برنامه
+            </button>
+          </div>
+        </form>
+
+        <!-- خلاصه برنامه مطالعه -->
+        <div id="studyPlanSummaryStrip" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6"></div>
+
+        <!-- لیست آیتم‌های برنامه مطالعه -->
+        <div id="studyPlanContainer" class="space-y-4"></div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- بخش ۲: گزارش کار                                                      -->
+    <!-- ===================================================================== -->
+    <section id="tab-report" class="main-tab-panel hidden space-y-6 anim-fade">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+        <div class="bg-darkbg-900 border-2 border-emerald-500/40 rounded-2xl p-4">
+          <div id="repSumDailyHours" class="num-lg">0</div>
+          <div class="subtext-lg mt-1">مجموع ساعت گزارش روزانه</div>
+        </div>
+
+        <div class="bg-darkbg-900 border-2 border-violet-500/40 rounded-2xl p-4">
+          <div id="repSumTopicHours" class="num-lg">0</div>
+          <div class="subtext-lg mt-1">مجموع ساعت گزارش موردی</div>
+        </div>
+
+        <div class="bg-darkbg-900 border-2 border-cyan-500/40 rounded-2xl p-4">
+          <div id="repSumTests" class="num-lg">0</div>
+          <div class="subtext-lg mt-1">کل تست گزارش‌شده</div>
+        </div>
+
+        <div class="bg-darkbg-900 border-2 border-amber-500/40 rounded-2xl p-4">
+          <div id="repSumAvgPercent" class="num-lg">0%</div>
+          <div class="subtext-lg mt-1">میانگین درصد</div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div class="lg:col-span-5 bg-darkbg-900 border border-emerald-500/30 rounded-3xl p-4 sm:p-6 shadow-xl">
+          <h2 class="text-xl font-black text-white mb-1">گزارش کار روزانه</h2>
+          <p class="subtext-lg mb-4">عملکرد واقعی مطالعه، تعداد تست و درصد دقت روزانه را ثبت کنید.</p>
+
+          <form id="formAddReport" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-sm font-bold text-white mb-1.5">تاریخ</label>
+                <input id="repDate" type="date" class="w-full rounded-xl bg-darkbg-950 border border-darkbg-700 px-3.5 py-2.5 text-sm font-bold text-white outline-none" />
+              </div>
+
+              <div>
+                <label class="block text-sm font-bold text-white mb-1.5">روز هفته</label>
+                <select id="repDay" class="w-full rounded-xl bg-darkbg-950 border border-darkbg-700 px-3.5 py-2.5 text-sm font-bold text-white outline-none">
+                  <option value="شنبه">شنبه</option>
+                  <option value="یک‌شنبه">یک‌شنبه</option>
+                  <option value="دوشنبه">دوشنبه</option>
+                  <option value="سه‌شنبه">سه‌شنبه</option>
+                  <option value="چهارشنبه">چهارشنبه</option>
+                  <option value="پنج‌شنبه">پنج‌شنبه</option>
+                  <option value="جمعه">جمعه</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3">
+              <div>
+                <label class="block text-sm font-bold text-white mb-1.5">ساعت مطالعه</label>
+                <input id="repHours" type="number" step="0.25" min="0" max="24" value="0" required class="w-full rounded-xl bg-darkbg-950 border border-emerald-500/40 px-3 py-2.5 outline-none" />
+              </div>
+              <div>
+                <label class="block text-sm font-bold text-white mb-1.5">تعداد تست</label>
+                <input id="repTests" type="number" min="0" max="2000" value="0" required class="w-full rounded-xl bg-darkbg-950 border border-cyan-500/40 px-3 py-2.5 outline-none" />
+              </div>
+              <div>
+                <label class="block text-sm font-bold text-white mb-1.5">درصد دقت</label>
+                <input id="repPercent" type="number" min="-100" max="100" step="0.5" value="0" required class="w-full rounded-xl bg-darkbg-950 border border-amber-500/40 px-3 py-2.5 outline-none" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-bold text-white mb-1.5">توضیحات روزانه</label>
+              <textarea
+                id="repNote"
+                rows="3"
+                placeholder="یادداشت و جمع‌بندی عملکرد روزانه"
+                class="w-full rounded-xl bg-darkbg-950 border border-darkbg-700 px-3.5 py-2.5 subtext-lg outline-none resize-y"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full py-3 rounded-xl bg-gradient-to-l from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-black text-base shadow-lg transition cursor-pointer"
+            >
+              ثبت گزارش کار روزانه
+            </button>
+          </form>
+        </div>
+
+        <div class="lg:col-span-7 space-y-5">
+          <div class="bg-darkbg-900 border border-cyan-500/30 rounded-3xl p-4 sm:p-6 shadow-xl">
+            <h3 class="text-lg font-black text-white mb-1">نمودار عملکرد هفتگی گزارش کار</h3>
+            <p class="subtext-lg mb-4">مقایسه ساعت مطالعه ثبت‌شده در روزهای هفته</p>
+            <div id="reportChartBars" class="grid grid-cols-7 gap-2 items-end h-44 pt-4 px-2 bg-darkbg-950 border border-darkbg-700 rounded-2xl"></div>
+          </div>
+
+          <div class="bg-darkbg-900 border border-darkbg-700 rounded-3xl p-4 sm:p-6 shadow-xl">
+            <h3 class="text-lg font-black text-white mb-4">سوابق گزارش کار روزانه</h3>
+            <div id="reportsListContainer" class="space-y-3.5"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- گزارش کار موارد انجام‌شده از برنامه مطالعه -->
+      <div id="singleTopicReportSection" class="bg-darkbg-900 border border-violet-500/30 rounded-3xl p-4 sm:p-6 shadow-xl space-y-5">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 pb-4 border-b border-darkbg-700">
+          <div>
+            <div class="flex items-center gap-2.5 flex-wrap">
+              <h3 class="text-xl sm:text-2xl font-black text-white">گزارش کار آیتم‌های انجام‌شده</h3>
+              <span id="topicReportCountBadge" class="num-md text-xs px-3 py-1 rounded-xl bg-gradient-to-l from-violet-600 to-fuchsia-600">0 مورد</span>
+            </div>
+            <p class="subtext-lg mt-1">
+              آیتم‌هایی که در برنامه مطالعه انجام‌شده علامت بخورند، برای ثبت ساعت دقیق، اطلاعات تکمیلی و توضیحات اینجا قرار می‌گیرند.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2 flex-wrap">
+            <select
+              id="topicReportDayFilter"
+              class="rounded-xl bg-darkbg-950 border border-violet-500/40 px-3.5 py-2 text-sm font-extrabold text-white outline-none"
+            >
+              <option value="ALL">همه روزها</option>
+              <option value="شنبه">شنبه</option>
+              <option value="یک‌شنبه">یک‌شنبه</option>
+              <option value="دوشنبه">دوشنبه</option>
+              <option value="سه‌شنبه">سه‌شنبه</option>
+              <option value="چهارشنبه">چهارشنبه</option>
+              <option value="پنج‌شنبه">پنج‌شنبه</option>
+              <option value="جمعه">جمعه</option>
+            </select>
+
+            <button
+              type="button"
+              id="btnJumpToStudyPlanFromTopic"
+              class="px-4 py-2 rounded-xl bg-gradient-to-l from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-xs sm:text-sm font-black transition cursor-pointer"
+            >
+              رفتن به برنامه مطالعه ←
+            </button>
+          </div>
+        </div>
+
+        <div id="topicReportsContainer" class="space-y-4"></div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- بخش ۳: ثبت (جلسات فقط با عنوان جلسه + تست‌ها با زمان خودکار و قابل تغییر) -->
+    <!-- ===================================================================== -->
+    <section id="tab-register" class="main-tab-panel hidden space-y-6 anim-fade">
+      <div class="bg-darkbg-900 border border-sky-500/30 rounded-3xl p-4 sm:p-6 shadow-xl">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 mb-6 border-b border-darkbg-700">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black text-white">بخش ثبت جلسات و تست‌ها</h2>
+            <p class="subtext-lg mt-1">
+              پس از ساخت و نهایی‌سازی، آیتم‌ها در صفحه اطلاعات دانش‌آموز قرار می‌گیرند.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 bg-darkbg-950 p-1.5 rounded-2xl border border-darkbg-700 shrink-0">
+            <button
+              type="button"
+              id="regSubTabSessionsBtn"
+              data-reg-subtab="reg-sessions"
+              class="px-4 py-2.5 rounded-xl text-sm font-black transition cursor-pointer"
+            >
+              ثبت جلسات
+            </button>
+            <button
+              type="button"
+              id="regSubTabTestsBtn"
+              data-reg-subtab="reg-tests"
+              class="px-4 py-2.5 rounded-xl text-sm font-black transition cursor-pointer"
+            >
+              ثبت تست‌ها
+            </button>
+          </div>
+        </div>
+
+        <!-- ثبت جلسات (فقط عنوان جلسه؛ بدون ساعت دقیق و مبحث) -->
+        <div id="reg-panel-sessions" class="space-y-6">
+          <form id="formGenerateRegSessions" class="bg-gradient-to-l from-indigo-950/40 via-darkbg-850 to-sky-950/30 border border-indigo-500/30 rounded-2xl p-4 sm:p-5 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="text-lg font-black text-white">ساخت باکس‌های جلسه (۱ تا N)</h3>
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-indigo-500/20 text-white border border-indigo-400/40">
+                اختصاصی: ۳ ساعت • عمومی: ۱.۵ ساعت
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+              <div>
+                <label class="block text-sm font-bold text-white mb-1.5">نوع درس</label>
+                <select
+                  id="regSesCategory"
+                  class="w-full rounded-xl bg-darkbg-950 border border-indigo-500/40 px-3.5 py-2.5 text-sm font-extrabold text-white outline-none"
+                >
+                  <option value="اختصاصی">اختصاصی</option>
+                  <option value="عمومی">عمومی</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-bold text-white mb-1.5">نام درس</label>
+                <select
+                  id="regSesSubject"
+                  class="w-full rounded-xl bg-darkbg-950 border border-sky-500/40 px-3.5 py-2.5 text-sm font-extrabold text-white outline-none"
+                ></select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-bold text-white mb-1.5">تعداد جلسات</label>
+                <input
+                  id="regSesCount"
+                  type="number"
+                  min="1"
+                  max="100"
+                  value="10"
+                  required
+                  class="w-full rounded-xl bg-darkbg-950 border border-violet-500/40 px-3.5 py-2.5 outline-none"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-bold text-white mb-1.5">ساعت هر جلسه</label>
+                <input
+                  id="regSesDuration"
+                  type="number"
+                  step="0.25"
+                  min="0.25"
+                  max="24"
+                  value="3"
+                  required
+                  class="w-full rounded-xl bg-darkbg-950 border border-cyan-500/40 px-3.5 py-2.5 outline-none"
+                />
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+              <button
+                type="submit"
+                class="px-6 py-3 rounded-xl bg-gradient-to-l from-indigo-600 via-sky-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white font-black text-sm sm:text-base shadow-lg transition cursor-pointer"
+              >
+                ساخت جلسات (۱ تا N)
+              </button>
+
+              <button
+                type="button"
+                id="btnFinalizeRegSessions"
+                class="px-6 py-3 rounded-xl bg-gradient-to-l from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black text-sm sm:text-base shadow-lg transition cursor-pointer"
+              >
+                ثبت نهایی و ارسال به اطلاعات دانش‌آموز ✓
+              </button>
+            </div>
+          </form>
+
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="text-base sm:text-lg font-black text-white">
+                عنوان جلسات (<span id="draftSesCounter" class="num-md">0</span> جلسه)
+              </h4>
+              <button
+                type="button"
+                id="btnClearDraftSes"
+                class="text-xs font-bold text-rose-300 hover:text-rose-200 px-3 py-1.5 rounded-xl bg-rose-500/15 border border-rose-500/30 cursor-pointer"
+              >
+                پاک کردن پیش‌نویس
+              </button>
+            </div>
+            <div id="draftSesListContainer" class="space-y-3"></div>
+          </div>
+        </div>
+
+        <!-- ثبت تست‌ها (محاسبه خودکار دقیقه بر اساس درس + امکان کم و زیاد کردن دستی زمان هر باکس) -->
+        <div id="reg-panel-tests" class="hidden space-y-6">
+          <form id="formGenerateRegTests" class="bg-gradient-to-l from-emerald-950/40 via-darkbg-850 to-teal-950/30 border border-emerald-500/30 rounded-2xl p-4 sm:p-5 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="text-lg font-black text-white">ساخت باکس‌های تست با زمان خودکار</h3>
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-white border border-emerald-400/40">
+                زیست، شیمی، زمین‌شناسی: ۶۰ ثانیه/تست • فیزیک: ۸۰ ثانیه/تست • ریاضی: ۹۰ ثانیه/تست
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+              <div>
+                <label class="block text-sm font-bold text-white mb-1.5">نوع درس</label>
+                <select
+                  id="regTstCategory"
+                  class="w-full rounded-xl bg-darkbg-950 border border-emerald-500/40 px-3.5 py-2.5 text-sm font-extrabold text-white outline-none"
+                >
+                  <option value="اختصاصی">اختصاصی</option>
+                  <option value="عمومی">عمومی</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-bold text-white mb-1.5">نام درس</label>
+                <select
+                  id="regTstSubject"
+                  class="w-full rounded-xl bg-darkbg-950 border border-teal-500/40 px-3.5 py-2.5 text-sm font-extrabold text-white outline-none"
+                ></select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-bold text-white mb-1.5">تعداد باکس تست</label>
+                <input
+                  id="regTstPackCount"
+                  type="number"
+                  min="1"
+                  max="100"
+                  value="12"
+                  required
+                  class="w-full rounded-xl bg-darkbg-950 border border-cyan-500/40 px-3.5 py-2.5 outline-none"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-bold text-white mb-1.5">تعداد تست هر باکس</label>
+                <input
+                  id="regTstPerPack"
+                  type="number"
+                  min="1"
+                  max="500"
+                  value="30"
+                  required
+                  class="w-full rounded-xl bg-darkbg-950 border border-amber-500/40 px-3.5 py-2.5 outline-none"
+                />
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+              <button
+                type="submit"
+                class="px-6 py-3 rounded-xl bg-gradient-to-l from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-black text-sm sm:text-base shadow-lg transition cursor-pointer"
+              >
+                ساخت باکس‌های تست (۱ تا N)
+              </button>
+
+              <button
+                type="button"
+                id="btnFinalizeRegTests"
+                class="px-6 py-3 rounded-xl bg-gradient-to-l from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-black text-sm sm:text-base shadow-lg transition cursor-pointer"
+              >
+                ثبت نهایی و ارسال به اطلاعات دانش‌آموز ✓
+              </button>
+            </div>
+          </form>
+
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="text-base sm:text-lg font-black text-white">
+                تنظیم عنوان و زمان باکس‌های تست (<span id="draftTstCounter" class="num-md">0</span> باکس)
+              </h4>
+              <button
+                type="button"
+                id="btnClearDraftTst"
+                class="text-xs font-bold text-rose-300 hover:text-rose-200 px-3 py-1.5 rounded-xl bg-rose-500/15 border border-rose-500/30 cursor-pointer"
+              >
+                پاک کردن پیش‌نویس
+              </button>
+            </div>
+            <div id="draftTstListContainer" class="space-y-3"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- بخش ۴: اطلاعات دانش‌آموز                                              -->
+    <!-- ===================================================================== -->
+    <section id="tab-advisor" class="main-tab-panel hidden space-y-6 anim-fade">
+      <div class="bg-darkbg-900 border border-amber-500/30 rounded-3xl p-4 sm:p-6 shadow-xl">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 mb-6 border-b border-darkbg-700">
+          <div>
+            <span class="inline-block text-xs font-black px-3 py-1 rounded-lg bg-gradient-to-l from-amber-600 to-orange-600 text-white mb-1.5">
+              پنل اطلاعات دانش‌آموز
+            </span>
+            <h2 class="text-xl sm:text-2xl font-black text-white">اطلاعات دانش‌آموز</h2>
+            <p class="subtext-lg mt-1">
+              درس مورد نظر را انتخاب کنید و جلسات یا باکس‌های تست را به روز دلخواه در برنامه مطالعه منتقل نمایید.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 bg-darkbg-950 p-1.5 rounded-2xl border border-darkbg-700 shrink-0">
+            <button
+              type="button"
+              id="advisorSubTabSessionsBtn"
+              data-advisor-subtab="adv-sessions"
+              class="px-5 py-2.5 rounded-xl text-sm font-black transition cursor-pointer"
+            >
+              جلسات
+            </button>
+            <button
+              type="button"
+              id="advisorSubTabTestsBtn"
+              data-advisor-subtab="adv-tests"
+              class="px-5 py-2.5 rounded-xl text-sm font-black transition cursor-pointer"
+            >
+              تست‌ها
+            </button>
+          </div>
+        </div>
+
+        <div id="advisor-panel-sessions" class="space-y-6">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div class="bg-gradient-to-br from-indigo-950/40 to-darkbg-850 border border-indigo-500/30 rounded-2xl p-4">
+              <h3 class="text-base font-black text-white mb-3 pb-2 border-b border-indigo-500/30">اختصاصی</h3>
+              <div id="advisorSesSpecCards" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5"></div>
+            </div>
+
+            <div class="bg-gradient-to-br from-cyan-950/40 to-darkbg-850 border border-cyan-500/30 rounded-2xl p-4">
+              <h3 class="text-base font-black text-white mb-3 pb-2 border-b border-cyan-500/30">عمومی</h3>
+              <div id="advisorSesGenCards" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-2.5"></div>
+            </div>
+          </div>
+
+          <div id="advisorSelectedSesArea" class="bg-darkbg-950 border border-darkbg-700 rounded-2xl p-4 sm:p-5"></div>
+        </div>
+
+        <div id="advisor-panel-tests" class="hidden space-y-6">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div class="bg-gradient-to-br from-emerald-950/40 to-darkbg-850 border border-emerald-500/30 rounded-2xl p-4">
+              <h3 class="text-base font-black text-white mb-3 pb-2 border-b border-emerald-500/30">اختصاصی</h3>
+              <div id="advisorTstSpecCards" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5"></div>
+            </div>
+
+            <div class="bg-gradient-to-br from-amber-950/40 to-darkbg-850 border border-amber-500/30 rounded-2xl p-4">
+              <h3 class="text-base font-black text-white mb-3 pb-2 border-b border-amber-500/30">عمومی</h3>
+              <div id="advisorTstGenCards" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-2.5"></div>
+            </div>
+          </div>
+
+          <div id="advisorSelectedTstArea" class="bg-darkbg-950 border border-darkbg-700 rounded-2xl p-4 sm:p-5"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- بخش ۵: چت دوطرفه دانش‌آموز و مشاور                                     -->
+    <!-- ===================================================================== -->
+    <section id="tab-chat" class="main-tab-panel hidden space-y-6 anim-fade">
+      <div class="bg-darkbg-900 border border-fuchsia-500/30 rounded-3xl p-4 sm:p-6 shadow-xl space-y-5">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 pb-4 border-b border-darkbg-700">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black text-white">چت دوطرفه دانش‌آموز و مشاور</h2>
+            <p class="subtext-lg mt-1">
+              جابه‌جایی بین نقش «دانش‌آموز» و «مشاور» برای ارسال پیام.
+            </p>
+          </div>
+
+          <!-- کنترل نقش و پاک کردن چت -->
+          <div class="flex flex-wrap items-center gap-2.5">
+            <div class="grid grid-cols-2 gap-1.5 bg-darkbg-950 p-1 rounded-xl border border-darkbg-700">
+              <button
+                type="button"
+                id="btnRoleUser"
+                data-chat-role="user"
+                class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-black transition cursor-pointer"
+              >
+                دانش‌آموز
+              </button>
+              <button
+                type="button"
+                id="btnRoleAdvisor"
+                data-chat-role="advisor"
+                class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-black transition cursor-pointer"
+              >
+                مشاور
+              </button>
+            </div>
+
+            <button
+              type="button"
+              id="btnClearChat"
+              class="px-3.5 py-2 rounded-xl bg-rose-950/70 hover:bg-rose-600 border border-rose-500/40 text-white text-xs font-extrabold transition cursor-pointer"
+            >
+              پاک کردن چت
+            </button>
+          </div>
+        </div>
+
+        <!-- پنجره نمایش پیام‌ها -->
+        <div id="chatMessagesContainer" class="bg-gradient-to-b from-darkbg-950 to-indigo-950/25 border border-indigo-500/30 rounded-2xl p-4 sm:p-5 h-[420px] overflow-y-auto space-y-3.5"></div>
+
+        <!-- فرم ارسال پیام -->
+        <form id="formSendChatMessage" class="flex flex-col sm:flex-row gap-3">
+          <input
+            id="chatMessageInput"
+            type="text"
+            required
+            placeholder="پیام خود را بنویسید..."
+            class="flex-1 rounded-xl bg-darkbg-950 border border-fuchsia-500/40 px-4 py-3 text-sm sm:text-base font-bold text-white outline-none"
+          />
+          <button
+            type="submit"
+            class="px-6 py-3 rounded-xl bg-gradient-to-l from-fuchsia-600 via-violet-600 to-indigo-600 hover:from-fuchsia-500 hover:to-indigo-500 text-white font-black text-sm sm:text-base shadow-lg transition cursor-pointer shrink-0"
+          >
+            ارسال پیام
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-indigo-500/25 bg-darkbg-900/80 py-4 px-4 text-center">
+    <p class="subtext-lg text-sm">سامانه برنامه‌ریزی و مشاوره تحصیلی</p>
+  </footer>
+
+  <script>
+    // =========================================================================
+    // ثابت‌ها و قوانین محاسبه زمان تست بر اساس درس
+    // =========================================================================
+    const SUBJECTS_MAP = {
+      'اختصاصی': ['زیست‌شناسی', 'فیزیک', 'شیمی', 'ریاضی', 'زمین‌شناسی'],
+      'عمومی': ['ادبیات فارسی', 'عربی', 'دین و زندگی', 'زبان انگلیسی']
+    };
+
+    const WEEK_DAYS = ['شنبه', 'یک‌شنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه'];
+    const CHART_BAR_COLORS = [
+      'from-indigo-600 to-violet-400',
+      'from-sky-600 to-cyan-400',
+      'from-emerald-600 to-teal-400',
+      'from-amber-500 to-yellow-300',
+      'from-fuchsia-600 to-pink-400',
+      'from-rose-600 to-orange-400',
+      'from-blue-600 to-indigo-400'
+    ];
+    const DAY_BADGE_COLORS = [
+      'bg-indigo-600',
+      'bg-sky-600',
+      'bg-emerald-600',
+      'bg-amber-600',
+      'bg-fuchsia-600',
+      'bg-rose-600',
+      'bg-violet-600'
+    ];
+    const VALID_MAIN_TABS = ['plan', 'report', 'register', 'advisor', 'chat'];
+    const STORAGE_KEY = 'study_tracker_v4_clean';
+    const THEME_STORAGE_KEY = 'study_tracker_theme_v1';
+
+    function getDayColorClass(day) {
+      const idx = WEEK_DAYS.indexOf(day);
+      return idx >= 0 ? DAY_BADGE_COLORS[idx % DAY_BADGE_COLORS.length] : 'bg-indigo-600';
+    }
+
+    /**
+     * محاسبه زمان خودکار تست (به دقیقه گردشده به یک رقم اعشار) بر اساس نام درس و تعداد تست:
+     * - زیست‌شناسی، شیمی، زمین‌شناسی: هر تست ۶۰ ثانیه (۱ دقیقه)
+     * - فیزیک: هر تست ۸۰ ثانیه
+     * - ریاضی: هر تست ۹۰ ثانیه
+     * - سایر دروس: هر تست ۶۰ ثانیه
+     */
+    function calculateAutoTestMinutes(subject, testCount) {
+      const count = Math.max(0, Number(testCount) || 0);
+      let secondsPerTest = 60;
+      if (subject === 'فیزیک') {
+        secondsPerTest = 80;
+      } else if (subject === 'ریاضی') {
+        secondsPerTest = 90;
+      }
+      const totalSeconds = count * secondsPerTest;
+      return Math.round((totalSeconds / 60) * 10) / 10;
+    }
+
+    function createDefaultData() {
+      return {
+        activeMainTab: 'plan',
+        regSubTab: 'reg-sessions',
+        advisorSubTab: 'adv-sessions',
+        selectedAdvisorSesSubject: 'زیست‌شناسی',
+        selectedAdvisorTstSubject: 'زیست‌شناسی',
+        draftRegSessions: [],
+        draftRegTests: [],
+        registeredSessions: [],
+        registeredTests: [],
+        studyPlanItems: [],
+        dailyReports: [],
+        topicReports: [],
+        chatRole: 'user',
+        chatMessages: []
+      };
+    }
+
+    let appState = createDefaultData();
+    let currentTheme = 'dark';
+    let eventsBound = false;
+
+    // =========================================================================
+    // مدیریت حالت روشن و تاریک
+    // =========================================================================
+    function applyTheme(theme) {
+      currentTheme = theme === 'light' ? 'light' : 'dark';
+      const isLight = currentTheme === 'light';
+
+      document.body.classList.toggle('light-mode', isLight);
+      document.documentElement.classList.toggle('dark', !isLight);
+
+      const iconEl = document.getElementById('themeIcon');
+      const labelEl = document.getElementById('themeLabel');
+      if (iconEl) iconEl.textContent = isLight ? '🌙' : '☀️';
+      if (labelEl) labelEl.textContent = isLight ? 'حالت تاریک' : 'حالت روشن';
+
+      try {
+        localStorage.setItem(THEME_STORAGE_KEY, currentTheme);
+      } catch (_) {}
+    }
+
+    function loadTheme() {
+      try {
+        const saved = localStorage.getItem(THEME_STORAGE_KEY);
+        applyTheme(saved === 'light' ? 'light' : 'dark');
+      } catch (_) {
+        applyTheme('dark');
+      }
+    }
+
+    function toggleTheme() {
+      applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    }
+
+    // =========================================================================
+    // ابزارهای کمکی و ذخیره‌سازی
+    // =========================================================================
+    function escapeHtml(val) {
+      return String(val ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function notify(message, type = 'info') {
+      try {
+        const root = document.getElementById('toastRoot');
+        if (!root) return;
+        const colorClass =
+          type === 'success'
+            ? 'bg-gradient-to-l from-emerald-600 to-teal-600 border-emerald-300'
+            : type === 'warning'
+            ? 'bg-gradient-to-l from-amber-600 to-orange-600 border-amber-300'
+            : 'bg-gradient-to-l from-fuchsia-600 to-indigo-600 border-fuchsia-300';
+
+        const card = document.createElement('div');
+        card.className = `pointer-events-auto rounded-2xl border ${colorClass} px-4 py-3 text-white text-sm font-extrabold shadow-2xl anim-fade`;
+        card.textContent = String(message || '');
+        root.appendChild(card);
+
+        setTimeout(() => {
+          card.style.opacity = '0';
+          card.style.transition = 'opacity 0.25s ease';
+          setTimeout(() => card.remove(), 260);
+        }, 3000);
+      } catch (_) {}
+    }
+
+    function saveAppState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      } catch (err) {
+        console.error('خطا در ذخیره‌سازی:', err);
+      }
+    }
+
+    function loadAppState() {
+      const defaults = createDefaultData();
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          appState = defaults;
+          return;
+        }
+        const parsed = JSON.parse(raw);
+        if (!parsed || typeof parsed !== 'object') {
+          appState = defaults;
+          return;
+        }
+        appState = {
+          activeMainTab: VALID_MAIN_TABS.includes(parsed.activeMainTab) ? parsed.activeMainTab : 'plan',
+          regSubTab: parsed.regSubTab === 'reg-tests' ? 'reg-tests' : 'reg-sessions',
+          advisorSubTab: parsed.advisorSubTab === 'adv-tests' ? 'adv-tests' : 'adv-sessions',
+          selectedAdvisorSesSubject:
+            typeof parsed.selectedAdvisorSesSubject === 'string' && parsed.selectedAdvisorSesSubject.trim()
+              ? parsed.selectedAdvisorSesSubject
+              : 'زیست‌شناسی',
+          selectedAdvisorTstSubject:
+            typeof parsed.selectedAdvisorTstSubject === 'string' && parsed.selectedAdvisorTstSubject.trim()
+              ? parsed.selectedAdvisorTstSubject
+              : 'زیست‌شناسی',
+          draftRegSessions: Array.isArray(parsed.draftRegSessions) ? parsed.draftRegSessions : [],
+          draftRegTests: Array.isArray(parsed.draftRegTests) ? parsed.draftRegTests : [],
+          registeredSessions: Array.isArray(parsed.registeredSessions) ? parsed.registeredSessions : [],
+          registeredTests: Array.isArray(parsed.registeredTests) ? parsed.registeredTests : [],
+          studyPlanItems: Array.isArray(parsed.studyPlanItems) ? parsed.studyPlanItems : [],
+          dailyReports: Array.isArray(parsed.dailyReports) ? parsed.dailyReports : [],
+          topicReports: Array.isArray(parsed.topicReports) ? parsed.topicReports : [],
+          chatRole: parsed.chatRole === 'advisor' ? 'advisor' : 'user',
+          chatMessages: Array.isArray(parsed.chatMessages) ? parsed.chatMessages : []
+        };
+      } catch (err) {
+        console.error('خطا در خواندن وضعیت:', err);
+        appState = defaults;
+      }
+    }
+
+    // =========================================================================
+    // تغییر تب‌های اصلی و زیرتب‌ها
+    // =========================================================================
+    function applyMainTabView(tabName) {
+      const targetTab = VALID_MAIN_TABS.includes(tabName) ? tabName : 'plan';
+      appState.activeMainTab = targetTab;
+
+      const activeTabStyles = {
+        plan: 'bg-gradient-to-l from-indigo-600 to-violet-600 border-indigo-300 text-white shadow-lg shadow-indigo-950/50',
+        report: 'bg-gradient-to-l from-emerald-600 to-teal-600 border-emerald-300 text-white shadow-lg shadow-emerald-950/50',
+        register: 'bg-gradient-to-l from-sky-600 to-cyan-600 border-sky-300 text-white shadow-lg shadow-sky-950/50',
+        advisor: 'bg-gradient-to-l from-amber-600 to-orange-600 border-amber-300 text-white shadow-lg shadow-amber-950/50',
+        chat: 'bg-gradient-to-l from-fuchsia-600 to-purple-600 border-fuchsia-300 text-white shadow-lg shadow-fuchsia-950/50'
+      };
+
+      document.querySelectorAll('.main-tab-panel').forEach((panel) => {
+        if (!panel) return;
+        panel.classList.toggle('hidden', panel.id !== 'tab-' + targetTab);
+      });
+
+      document.querySelectorAll('.main-tab-btn').forEach((btn) => {
+        if (!btn) return;
+        const btnTab = btn.getAttribute('data-main-tab');
+        const isActive = btnTab === targetTab;
+        const colSpanClass = btnTab === 'chat' ? 'col-span-2 sm:col-span-1 ' : '';
+        btn.className = isActive
+          ? `main-tab-btn ${colSpanClass}px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border ${activeTabStyles[btnTab] || activeTabStyles.plan} transition flex items-center justify-center gap-2 cursor-pointer`
+          : `main-tab-btn ${colSpanClass}px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border bg-darkbg-850 hover:bg-darkbg-800 border-darkbg-700 text-white transition flex items-center justify-center gap-2 cursor-pointer`;
+      });
+    }
+
+    function switchMainTab(tabName) {
+      applyMainTabView(tabName);
+      saveAppState();
+      renderAll();
+    }
+
+    function applyRegSubTabView(subTabName) {
+      const targetSub = subTabName === 'reg-tests' ? 'reg-tests' : 'reg-sessions';
+      appState.regSubTab = targetSub;
+
+      const sesPanel = document.getElementById('reg-panel-sessions');
+      const tstPanel = document.getElementById('reg-panel-tests');
+      const sesBtn = document.getElementById('regSubTabSessionsBtn');
+      const tstBtn = document.getElementById('regSubTabTestsBtn');
+
+      if (sesPanel && tstPanel) {
+        sesPanel.classList.toggle('hidden', targetSub !== 'reg-sessions');
+        tstPanel.classList.toggle('hidden', targetSub !== 'reg-tests');
+      }
+
+      if (sesBtn && tstBtn) {
+        if (targetSub === 'reg-sessions') {
+          sesBtn.className = 'px-4 py-2.5 rounded-xl text-sm font-black bg-gradient-to-l from-indigo-600 to-sky-600 text-white shadow transition cursor-pointer';
+          tstBtn.className = 'px-4 py-2.5 rounded-xl text-sm font-black text-white hover:bg-darkbg-800 transition cursor-pointer';
+        } else {
+          tstBtn.className = 'px-4 py-2.5 rounded-xl text-sm font-black bg-gradient-to-l from-emerald-600 to-teal-600 text-white shadow transition cursor-pointer';
+          sesBtn.className = 'px-4 py-2.5 rounded-xl text-sm font-black text-white hover:bg-darkbg-800 transition cursor-pointer';
+        }
+      }
+    }
+
+    function switchRegSubTab(subTabName) {
+      applyRegSubTabView(subTabName);
+      saveAppState();
+      renderRegistrationDrafts();
+    }
+
+    function applyAdvisorSubTabView(subTabName) {
+      const targetSub = subTabName === 'adv-tests' ? 'adv-tests' : 'adv-sessions';
+      appState.advisorSubTab = targetSub;
+
+      const sesPanel = document.getElementById('advisor-panel-sessions');
+      const tstPanel = document.getElementById('advisor-panel-tests');
+      const sesBtn = document.getElementById('advisorSubTabSessionsBtn');
+      const tstBtn = document.getElementById('advisorSubTabTestsBtn');
+
+      if (sesPanel && tstPanel) {
+        sesPanel.classList.toggle('hidden', targetSub !== 'adv-sessions');
+        tstPanel.classList.toggle('hidden', targetSub !== 'adv-tests');
+      }
+
+      if (sesBtn && tstBtn) {
+        sesBtn.className = targetSub === 'adv-sessions'
+          ? 'px-5 py-2.5 rounded-xl text-sm font-black bg-gradient-to-l from-indigo-600 to-violet-600 text-white shadow transition cursor-pointer'
+          : 'px-5 py-2.5 rounded-xl text-sm font-black bg-darkbg-900 text-white hover:bg-darkbg-800 transition cursor-pointer';
+        tstBtn.className = targetSub === 'adv-tests'
+          ? 'px-5 py-2.5 rounded-xl text-sm font-black bg-gradient-to-l from-emerald-600 to-teal-600 text-white shadow transition cursor-pointer'
+          : 'px-5 py-2.5 rounded-xl text-sm font-black bg-darkbg-900 text-white hover:bg-darkbg-800 transition cursor-pointer';
+      }
+    }
+
+    function switchAdvisorSubTab(subTabName) {
+      applyAdvisorSubTabView(subTabName);
+      saveAppState();
+      renderAdvisorSection();
+    }
+
+    // =========================================================================
+    // آمار کلیدی و شمارنده‌ها
+    // =========================================================================
+    function renderTopStats() {
+      const planItems = Array.isArray(appState.studyPlanItems) ? appState.studyPlanItems : [];
+      const reports = Array.isArray(appState.dailyReports) ? appState.dailyReports : [];
+      const topicReports = Array.isArray(appState.topicReports) ? appState.topicReports : [];
+      const regSes = Array.isArray(appState.registeredSessions) ? appState.registeredSessions : [];
+      const regTst = Array.isArray(appState.registeredTests) ? appState.registeredTests : [];
+      const chatMsgs = Array.isArray(appState.chatMessages) ? appState.chatMessages : [];
+
+      const planHours = planItems
+        .filter((i) => i && i.kind === 'جلسه مطالعه')
+        .reduce((acc, i) => acc + (Number(i.amount) || 0), 0);
+
+      const planTests = planItems
+        .filter((i) => i && i.kind === 'تست‌زنی')
+        .reduce((acc, i) => acc + (Number(i.amount) || 0), 0);
+
+      const dailyHours = reports.reduce((acc, r) => acc + (Number(r && r.hours) || 0), 0);
+      const topicHours = topicReports.reduce((acc, tr) => acc + (Number(tr && tr.exactHours) || 0), 0);
+      const totalActualHours = Math.round((dailyHours + topicHours) * 100) / 100;
+
+      const reportAvg = reports.length > 0
+        ? Math.round((reports.reduce((acc, r) => acc + (Number(r && r.percent) || 0), 0) / reports.length) * 10) / 10
+        : 0;
+
+      const elPlanHours = document.getElementById('kpiPlanHours');
+      const elPlanTests = document.getElementById('kpiPlanTests');
+      const elReportHours = document.getElementById('kpiReportHours');
+      const elReportAvg = document.getElementById('kpiReportAvg');
+
+      if (elPlanHours) elPlanHours.textContent = String(planHours);
+      if (elPlanTests) elPlanTests.textContent = String(planTests);
+      if (elReportHours) elReportHours.textContent = String(totalActualHours);
+      if (elReportAvg) elReportAvg.textContent = String(reportAvg) + '%';
+
+      const navPlan = document.getElementById('navCountPlan');
+      const navRep = document.getElementById('navCountReports');
+      const navReg = document.getElementById('navCountReg');
+      const navAdv = document.getElementById('navCountAdvisor');
+      const navChat = document.getElementById('navCountChat');
+
+      if (navPlan) navPlan.textContent = String(planItems.length);
+      if (navRep) navRep.textContent = String(reports.length + topicReports.length);
+      if (navReg) navReg.textContent = String(appState.draftRegSessions.length + appState.draftRegTests.length);
+      if (navAdv) navAdv.textContent = String(regSes.length + regTst.length);
+      if (navChat) navChat.textContent = String(chatMsgs.length);
+    }
+
+    // =========================================================================
+    // بخش ۱: برنامه مطالعه و همگام‌سازی با گزارش کار آیتم‌های انجام‌شده
+    // =========================================================================
+    function syncTopicReportWithPlanItem(planItem) {
+      if (!planItem || !planItem.id) return;
+      if (!Array.isArray(appState.topicReports)) {
+        appState.topicReports = [];
+      }
+
+      const existingIdx = appState.topicReports.findIndex((tr) => tr && tr.planItemId === planItem.id);
+
+      if (planItem.completed) {
+        if (existingIdx === -1) {
+          appState.topicReports.unshift({
+            id: 'tprep-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+            planItemId: planItem.id,
+            day: planItem.day,
+            kind: planItem.kind,
+            subject: planItem.subject,
+            title: planItem.title,
+            plannedAmount: planItem.amount,
+            plannedUnit: planItem.unit,
+            exactHours: planItem.unit === 'ساعت' ? (Number(planItem.amount) || 0) : Math.round(((Number(planItem.durationMinutes) || 0) / 60) * 100) / 100,
+            durationMinutes: Number(planItem.durationMinutes) || 0,
+            extraInfo: planItem.durationMinutes ? `${planItem.durationMinutes} دقیقه زمان اختصاص‌یافته` : '',
+            description: '',
+            saved: false,
+            completedAt: new Date().toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' })
+          });
+        }
+      } else if (existingIdx !== -1) {
+        appState.topicReports.splice(existingIdx, 1);
+      }
+    }
+
+    function handleAddManualPlan(e) {
+      e.preventDefault();
+      const dayEl = document.getElementById('manualPlanDay');
+      const kindEl = document.getElementById('manualPlanKind');
+      const subjectEl = document.getElementById('manualPlanSubject');
+      const titleEl = document.getElementById('manualPlanTitle');
+      const amountEl = document.getElementById('manualPlanAmount');
+
+      const day = dayEl ? dayEl.value : 'شنبه';
+      const kind = kindEl ? kindEl.value : 'جلسه مطالعه';
+      const subject = subjectEl ? subjectEl.value : 'زیست‌شناسی';
+      const title = titleEl ? titleEl.value.trim() : '';
+      const amount = amountEl ? parseFloat(amountEl.value) : 0;
+
+      if (!title) {
+        notify('عنوان برنامه را وارد کنید.', 'warning');
+        return;
+      }
+      if (!amount || amount <= 0) {
+        notify('مقدار باید بزرگ‌تر از صفر باشد.', 'warning');
+        return;
+      }
+
+      const unit = kind === 'تست‌زنی' ? 'تست' : 'ساعت';
+      const durationMinutes = kind === 'تست‌زنی' ? calculateAutoTestMinutes(subject, amount) : Math.round(amount * 60);
+
+      appState.studyPlanItems.unshift({
+        id: 'plan-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+        day,
+        kind,
+        subject,
+        title,
+        amount,
+        unit,
+        durationMinutes,
+        completed: false,
+        source: 'برنامه مطالعه'
+      });
+
+      if (titleEl) titleEl.value = '';
+      saveAppState();
+      renderAll();
+      notify('مورد جدید به برنامه مطالعه اضافه شد.', 'success');
+    }
+
+    function togglePlanCompleted(id) {
+      const item = appState.studyPlanItems.find((x) => x && x.id === id);
+      if (!item) return;
+      item.completed = !item.completed;
+      syncTopicReportWithPlanItem(item);
+      saveAppState();
+      renderAll();
+    }
+
+    function removePlanItem(id) {
+      appState.studyPlanItems = appState.studyPlanItems.filter((x) => x && x.id !== id);
+      appState.topicReports = (appState.topicReports || []).filter((tr) => tr && tr.planItemId !== id);
+      saveAppState();
+      renderAll();
+    }
+
+    function renderStudyPlan() {
+      const summaryEl = document.getElementById('studyPlanSummaryStrip');
+      const listEl = document.getElementById('studyPlanContainer');
+      const filterEl = document.getElementById('planDayFilter');
+      if (!summaryEl || !listEl) return;
+
+      const allItems = Array.isArray(appState.studyPlanItems) ? appState.studyPlanItems : [];
+      const selectedDay = filterEl ? filterEl.value : 'ALL';
+      const filtered = selectedDay === 'ALL' ? allItems : allItems.filter((i) => i && i.day === selectedDay);
+
+      const totalCount = filtered.length;
+      const doneCount = filtered.filter((i) => i && i.completed).length;
+      const totalHours = filtered
+        .filter((i) => i && i.kind === 'جلسه مطالعه')
+        .reduce((a, b) => a + (Number(b.amount) || 0), 0);
+      const totalTests = filtered
+        .filter((i) => i && i.kind === 'تست‌زنی')
+        .reduce((a, b) => a + (Number(b.amount) || 0), 0);
+
+      summaryEl.innerHTML = `
+        <div class="bg-darkbg-950 border-2 border-indigo-500/40 rounded-2xl p-3.5">
+          <div class="num-lg">${totalCount}</div>
+          <div class="subtext-lg text-sm mt-0.5">کل آیتم‌های برنامه</div>
+        </div>
+        <div class="bg-darkbg-950 border-2 border-emerald-500/40 rounded-2xl p-3.5">
+          <div class="num-lg">${doneCount}</div>
+          <div class="subtext-lg text-sm mt-0.5">انجام‌شده</div>
+        </div>
+        <div class="bg-darkbg-950 border-2 border-cyan-500/40 rounded-2xl p-3.5">
+          <div class="num-lg">${totalHours} ساعت</div>
+          <div class="subtext-lg text-sm mt-0.5">مجموع ساعت مطالعه</div>
+        </div>
+        <div class="bg-darkbg-950 border-2 border-fuchsia-500/40 rounded-2xl p-3.5">
+          <div class="num-lg">${totalTests} تست</div>
+          <div class="subtext-lg text-sm mt-0.5">مجموع تست برنامه‌ریزی‌شده</div>
+        </div>
+      `;
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = `
+          <div class="bg-darkbg-950 border border-dashed border-indigo-500/40 rounded-2xl p-8 text-center">
+            <div class="num-lg mb-2">آیتمی در برنامه مطالعه ثبت نشده است</div>
+            <p class="subtext-lg">
+              از فرم بالا آیتم اضافه کنید یا از اطلاعات دانش‌آموز به برنامه منتقل نمایید.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      listEl.innerHTML = filtered.map((item) => {
+        const dayColor = getDayColorClass(item.day);
+        return `
+        <div class="rounded-2xl border ${item.completed ? 'bg-emerald-950/25 border-emerald-500/50' : 'bg-darkbg-950 border-indigo-500/30'} p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition">
+          <div class="flex items-start gap-3.5">
+            <button
+              type="button"
+              data-plan-toggle="${escapeHtml(item.id)}"
+              class="mt-0.5 px-3 py-2 rounded-xl text-xs font-black border transition shrink-0 cursor-pointer ${
+                item.completed
+                  ? 'bg-gradient-to-l from-emerald-600 to-teal-600 border-emerald-400 text-white'
+                  : 'bg-darkbg-850 hover:bg-indigo-600/30 border-indigo-500/40 text-white'
+              }"
+            >
+              ${item.completed ? '✓ انجام شد' : 'در انتظار'}
+            </button>
+
+            <div>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-lg ${dayColor} text-white text-xs font-extrabold">${escapeHtml(item.day)}</span>
+                <span class="px-2.5 py-0.5 rounded-lg bg-violet-600/30 border border-violet-400/40 text-white text-xs font-bold">${escapeHtml(item.subject)}</span>
+                <span class="px-2.5 py-0.5 rounded-lg bg-cyan-600/30 border border-cyan-400/40 text-white text-xs font-bold">${escapeHtml(item.kind)}</span>
+              </div>
+              <div class="text-base sm:text-lg font-black text-white mt-1.5 ${item.completed ? 'line-through opacity-85' : ''}">
+                ${escapeHtml(item.title)}
+              </div>
+              ${item.durationMinutes ? `
+                <div class="subtext-lg text-sm mt-0.5">
+                  زمان محاسبه‌شده: <span class="num-md text-sm">${escapeHtml(item.durationMinutes)} دقیقه</span>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between sm:justify-end gap-4 border-t sm:border-t-0 border-darkbg-800 pt-3 sm:pt-0">
+            <div class="text-left">
+              <div class="num-lg">${escapeHtml(item.amount)} ${escapeHtml(item.unit)}</div>
+              <div class="subtext-lg text-xs">${escapeHtml(item.source || 'برنامه مطالعه')}</div>
+            </div>
+
+            <button
+              type="button"
+              data-plan-delete="${escapeHtml(item.id)}"
+              class="px-3 py-2 rounded-xl bg-rose-950/60 hover:bg-rose-600 border border-rose-500/40 text-xs font-extrabold text-white transition cursor-pointer"
+            >
+              حذف
+            </button>
+          </div>
+        </div>
+      `;
+      }).join('');
+    }
+
+    // =========================================================================
+    // بخش ۲: گزارش کار روزانه و گزارش کار آیتم‌های انجام‌شده
+    // =========================================================================
+    function handleAddReport(e) {
+      e.preventDefault();
+      const dateEl = document.getElementById('repDate');
+      const dayEl = document.getElementById('repDay');
+      const hoursEl = document.getElementById('repHours');
+      const testsEl = document.getElementById('repTests');
+      const percentEl = document.getElementById('repPercent');
+      const noteEl = document.getElementById('repNote');
+
+      const dateVal = dateEl ? dateEl.value : '';
+      const day = dayEl ? dayEl.value : 'شنبه';
+      const hours = hoursEl ? parseFloat(hoursEl.value) : 0;
+      const tests = testsEl ? parseInt(testsEl.value, 10) : 0;
+      const percent = percentEl ? parseFloat(percentEl.value) : 0;
+      const note = noteEl && noteEl.value.trim() ? noteEl.value.trim() : 'گزارش روزانه ثبت شد.';
+
+      if (Number.isNaN(hours) || hours < 0) {
+        notify('ساعت مطالعه را معتبر وارد کنید.', 'warning');
+        return;
+      }
+
+      appState.dailyReports.unshift({
+        id: 'rep-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+        date: dateVal || '',
+        day,
+        hours,
+        tests: Number.isNaN(tests) ? 0 : tests,
+        percent: Number.isNaN(percent) ? 0 : percent,
+        note
+      });
+
+      if (noteEl) noteEl.value = '';
+      saveAppState();
+      renderAll();
+      notify('گزارش کار روزانه ثبت شد.', 'success');
+    }
+
+    function deleteReport(id) {
+      appState.dailyReports = appState.dailyReports.filter((r) => r && r.id !== id);
+      saveAppState();
+      renderAll();
+    }
+
+    function renderReportsSummaryStrip() {
+      const reports = Array.isArray(appState.dailyReports) ? appState.dailyReports : [];
+      const topicReports = Array.isArray(appState.topicReports) ? appState.topicReports : [];
+
+      const dailyHours = Math.round(reports.reduce((acc, r) => acc + (Number(r && r.hours) || 0), 0) * 100) / 100;
+      const topicHours = Math.round(topicReports.reduce((acc, tr) => acc + (Number(tr && tr.exactHours) || 0), 0) * 100) / 100;
+      const totalTests = reports.reduce((acc, r) => acc + (Number(r && r.tests) || 0), 0);
+      const avgPercent = reports.length > 0
+        ? Math.round((reports.reduce((acc, r) => acc + (Number(r && r.percent) || 0), 0) / reports.length) * 10) / 10
+        : 0;
+
+      const elDailyHours = document.getElementById('repSumDailyHours');
+      const elTopicHours = document.getElementById('repSumTopicHours');
+      const elTests = document.getElementById('repSumTests');
+      const elAvg = document.getElementById('repSumAvgPercent');
+
+      if (elDailyHours) elDailyHours.textContent = `${dailyHours} ساعت`;
+      if (elTopicHours) elTopicHours.textContent = `${topicHours} ساعت`;
+      if (elTests) elTests.textContent = `${totalTests} تست`;
+      if (elAvg) elAvg.textContent = `${avgPercent}%`;
+    }
+
+    function renderDailyReports() {
+      renderReportsSummaryStrip();
+
+      const chartEl = document.getElementById('reportChartBars');
+      const listEl = document.getElementById('reportsListContainer');
+      if (!chartEl || !listEl) return;
+
+      const reports = Array.isArray(appState.dailyReports) ? appState.dailyReports : [];
+
+      const dayTotals = WEEK_DAYS.map((day, idx) => {
+        const sum = reports
+          .filter((r) => r && r.day === day)
+          .reduce((acc, r) => acc + (Number(r.hours) || 0), 0);
+        return { day, sum, barGrad: CHART_BAR_COLORS[idx % CHART_BAR_COLORS.length] };
+      });
+
+      const maxVal = Math.max(1, ...dayTotals.map((d) => d.sum));
+
+      chartEl.innerHTML = dayTotals.map((d) => {
+        const heightPct = d.sum > 0 ? Math.max(14, Math.round((d.sum / maxVal) * 100)) : 4;
+        return `
+          <div class="flex flex-col items-center justify-end h-full gap-1.5">
+            <span class="num-md text-xs">${d.sum}</span>
+            <div class="w-full max-w-[38px] rounded-t-xl bg-gradient-to-t ${d.barGrad} transition-all shadow" style="height: ${heightPct}%"></div>
+            <span class="text-[11px] font-extrabold text-white truncate w-full text-center">${d.day}</span>
+          </div>
+        `;
+      }).join('');
+
+      if (reports.length === 0) {
+        listEl.innerHTML = `
+          <div class="bg-darkbg-950 border border-dashed border-darkbg-700 rounded-2xl p-6 text-center">
+            <p class="subtext-lg">گزارش کار روزانه‌ای ثبت نشده است.</p>
+          </div>
+        `;
+        return;
+      }
+
+      listEl.innerHTML = reports.map((r) => {
+        const dayColor = getDayColorClass(r.day);
+        return `
+        <div class="bg-darkbg-950 border border-emerald-500/30 rounded-2xl p-4 space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="px-3 py-1 rounded-xl ${dayColor} text-white text-xs font-black">${escapeHtml(r.day)}</span>
+              ${r.date ? `<span class="px-2.5 py-1 rounded-xl bg-darkbg-850 border border-darkbg-700 text-white text-xs font-bold">${escapeHtml(r.date)}</span>` : ''}
+            </div>
+
+            <button
+              type="button"
+              data-report-delete="${escapeHtml(r.id)}"
+              class="px-3 py-1.5 rounded-xl bg-rose-950/60 hover:bg-rose-600 border border-rose-500/40 text-xs font-extrabold text-white transition cursor-pointer"
+            >
+              حذف
+            </button>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2.5">
+            <div class="bg-darkbg-900 rounded-xl p-2.5 border border-emerald-500/30">
+              <div class="num-md">${escapeHtml(r.hours)} ساعت</div>
+              <div class="subtext-lg text-xs">ساعت مطالعه</div>
+            </div>
+            <div class="bg-darkbg-900 rounded-xl p-2.5 border border-cyan-500/30">
+              <div class="num-md">${escapeHtml(r.tests)} تست</div>
+              <div class="subtext-lg text-xs">تعداد تست</div>
+            </div>
+            <div class="bg-darkbg-900 rounded-xl p-2.5 border border-amber-500/30">
+              <div class="num-md">${escapeHtml(r.percent)}%</div>
+              <div class="subtext-lg text-xs">درصد دقت</div>
+            </div>
+          </div>
+
+          <div class="bg-darkbg-900 border border-darkbg-800 rounded-xl p-3">
+            <div class="subtext-lg">${escapeHtml(r.note)}</div>
+          </div>
+        </div>
+      `;
+      }).join('');
+    }
+
+    function updateTopicReportField(topicReportId, field, rawValue) {
+      const entry = (appState.topicReports || []).find((tr) => tr && tr.id === topicReportId);
+      if (!entry) return;
+
+      if (field === 'exactHours') {
+        const parsed = parseFloat(rawValue);
+        entry.exactHours = Number.isNaN(parsed) || parsed < 0 ? 0 : parsed;
+        saveAppState();
+        renderTopStats();
+        renderReportsSummaryStrip();
+        return;
+      }
+
+      entry[field] = rawValue;
+      saveAppState();
+    }
+
+    function confirmTopicReport(topicReportId) {
+      const entry = (appState.topicReports || []).find((tr) => tr && tr.id === topicReportId);
+      if (!entry) return;
+      entry.saved = true;
+      saveAppState();
+      renderTopStats();
+      renderReportsSummaryStrip();
+      renderTopicReports();
+      notify('گزارش آیتم ذخیره شد.', 'success');
+    }
+
+    function unmarkTopicReportPlan(planItemId) {
+      const planItem = (appState.studyPlanItems || []).find((p) => p && p.id === planItemId);
+      if (planItem) {
+        planItem.completed = false;
+        syncTopicReportWithPlanItem(planItem);
+      } else {
+        appState.topicReports = (appState.topicReports || []).filter((tr) => tr && tr.planItemId !== planItemId);
+      }
+      saveAppState();
+      renderAll();
+    }
+
+    function renderTopicReports() {
+      const container = document.getElementById('topicReportsContainer');
+      const badge = document.getElementById('topicReportCountBadge');
+      const filterEl = document.getElementById('topicReportDayFilter');
+      if (!container) return;
+
+      const allItems = Array.isArray(appState.topicReports) ? appState.topicReports : [];
+      const selectedDay = filterEl ? filterEl.value : 'ALL';
+      const visibleItems = selectedDay === 'ALL'
+        ? allItems
+        : allItems.filter((tr) => tr && tr.day === selectedDay);
+
+      if (badge) {
+        badge.textContent = `${visibleItems.length} مورد`;
+      }
+
+      if (visibleItems.length === 0) {
+        container.innerHTML = `
+          <div class="bg-darkbg-950 border border-dashed border-violet-500/40 rounded-2xl p-6 text-center">
+            <div class="num-lg mb-1.5">مورد انجام‌شده‌ای ثبت نشده است</div>
+            <p class="subtext-lg">
+              در بخش برنامه مطالعه، وضعیت آیتم را به انجام‌شده تغییر دهید تا در این لیست ظاهر شود.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = visibleItems.map((tr) => {
+        const dayColor = getDayColorClass(tr.day);
+        return `
+        <div class="rounded-2xl border ${tr.saved ? 'bg-emerald-950/25 border-emerald-500/50' : 'bg-darkbg-950 border-violet-500/40'} p-4 sm:p-5 space-y-4">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 pb-3 border-b border-darkbg-800">
+            <div class="space-y-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-3 py-1 rounded-xl ${dayColor} text-white text-xs font-black">${escapeHtml(tr.day)}</span>
+                <span class="px-3 py-1 rounded-xl bg-fuchsia-600/30 border border-fuchsia-400/40 text-white text-xs font-extrabold">
+                  ${escapeHtml(tr.subject)} • ${escapeHtml(tr.kind)}
+                </span>
+                <span class="num-md text-xs px-2.5 py-1 rounded-xl bg-darkbg-850 border border-cyan-500/30">
+                  مقدار برنامه: ${escapeHtml(tr.plannedAmount)} ${escapeHtml(tr.plannedUnit)}
+                </span>
+              </div>
+
+              <div class="text-lg font-black text-white pt-1">${escapeHtml(tr.title)}</div>
+            </div>
+
+            <div class="flex items-center gap-2 shrink-0">
+              <button
+                type="button"
+                data-topic-save="${escapeHtml(tr.id)}"
+                class="px-4 py-2.5 rounded-xl bg-gradient-to-l from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs sm:text-sm font-black shadow transition cursor-pointer"
+              >
+                ذخیره گزارش
+              </button>
+              <button
+                type="button"
+                data-topic-undo="${escapeHtml(tr.planItemId)}"
+                class="px-3 py-2.5 rounded-xl bg-darkbg-850 hover:bg-rose-600 border border-rose-500/40 text-white text-xs font-extrabold transition cursor-pointer"
+              >
+                لغو انجام
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-sm font-bold text-white mb-1.5">ساعت دقیق (ساعت)</label>
+              <input
+                type="number"
+                step="0.05"
+                min="0"
+                max="24"
+                value="${escapeHtml(tr.exactHours)}"
+                data-topic-id="${escapeHtml(tr.id)}"
+                data-topic-field="exactHours"
+                class="topic-report-input w-full rounded-xl bg-darkbg-900 border border-violet-500/40 px-3.5 py-2.5 outline-none"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-bold text-white mb-1.5">اطلاعات تکمیلی</label>
+              <input
+                type="text"
+                value="${escapeHtml(tr.extraInfo)}"
+                data-topic-id="${escapeHtml(tr.id)}"
+                data-topic-field="extraInfo"
+                placeholder="تعداد تست، درصد یا منبع"
+                class="topic-report-input w-full rounded-xl bg-darkbg-900 border border-cyan-500/40 px-3.5 py-2.5 text-sm font-bold text-white outline-none"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold text-white mb-1.5">توضیحات</label>
+            <textarea
+              rows="2"
+              data-topic-id="${escapeHtml(tr.id)}"
+              data-topic-field="description"
+              placeholder="توضیحات این آیتم"
+              class="topic-report-input w-full rounded-xl bg-darkbg-900 border border-darkbg-700 px-3.5 py-2.5 subtext-lg outline-none resize-y"
+            >${escapeHtml(tr.description)}</textarea>
+          </div>
+        </div>
+      `;
+      }).join('');
+    }
+
+    // =========================================================================
+    // بخش ۳: ثبت جلسات (فقط عنوان جلسه) و ثبت تست‌ها (زمان خودکار + قابل تغییر)
+    // =========================================================================
+    function syncSubjectOptions(catSelectId, subjSelectId, durationInputId) {
+      const catEl = document.getElementById(catSelectId);
+      const subjEl = document.getElementById(subjSelectId);
+      if (!catEl || !subjEl) return;
+
+      const cat = catEl.value;
+      const list = SUBJECTS_MAP[cat] || SUBJECTS_MAP['اختصاصی'];
+      subjEl.innerHTML = list.map((s) => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+
+      if (durationInputId) {
+        const durEl = document.getElementById(durationInputId);
+        if (durEl) {
+          durEl.value = cat === 'عمومی' ? '1.5' : '3';
+        }
+      }
+    }
+
+    function handleGenerateRegSessions(e) {
+      e.preventDefault();
+      const category = document.getElementById('regSesCategory').value;
+      const subject = document.getElementById('regSesSubject').value;
+      const count = parseInt(document.getElementById('regSesCount').value, 10);
+      const duration = parseFloat(document.getElementById('regSesDuration').value);
+
+      if (!count || count < 1 || count > 100) {
+        notify('تعداد جلسات باید بین ۱ تا ۱۰۰ باشد.', 'warning');
+        return;
+      }
+      if (!duration || duration <= 0) {
+        notify('ساعت هر جلسه باید بزرگ‌تر از صفر باشد.', 'warning');
+        return;
+      }
+
+      const generated = [];
+      for (let i = 1; i <= count; i++) {
+        generated.push({
+          id: 'dses-' + Date.now() + '-' + i + '-' + Math.random().toString(36).slice(2, 5),
+          number: i,
+          category,
+          subject,
+          duration,
+          name: ''
+        });
+      }
+
+      appState.draftRegSessions = generated;
+      saveAppState();
+      renderAll();
+      notify(`${count} باکس جلسه ساخته شد.`, 'success');
+    }
+
+    function updateDraftSesName(id, value) {
+      const item = appState.draftRegSessions.find((s) => s && s.id === id);
+      if (!item) return;
+      item.name = value;
+      saveAppState();
+    }
+
+    function clearDraftSes() {
+      appState.draftRegSessions = [];
+      saveAppState();
+      renderAll();
+    }
+
+    function finalizeRegSessions() {
+      if (!Array.isArray(appState.draftRegSessions) || appState.draftRegSessions.length === 0) {
+        notify('ابتدا باکس‌های جلسه را بسازید.', 'warning');
+        return;
+      }
+
+      const existingCountBySubject = {};
+      appState.registeredSessions.forEach((s) => {
+        if (s && s.subject) {
+          existingCountBySubject[s.subject] = (existingCountBySubject[s.subject] || 0) + 1;
+        }
+      });
+
+      const finalized = appState.draftRegSessions.map((d) => {
+        const nextNum = (existingCountBySubject[d.subject] || 0) + 1;
+        existingCountBySubject[d.subject] = nextNum;
+        return {
+          id: 'regses-' + Date.now() + '-' + nextNum + '-' + Math.random().toString(36).slice(2, 6),
+          number: nextNum,
+          category: d.category,
+          subject: d.subject,
+          duration: d.duration,
+          name: (d.name || '').trim() || `جلسه ${nextNum} ${d.subject}`,
+          transferredDays: []
+        };
+      });
+
+      const firstSubject = finalized[0].subject;
+      appState.registeredSessions.push(...finalized);
+      appState.draftRegSessions = [];
+      appState.selectedAdvisorSesSubject = firstSubject;
+      appState.advisorSubTab = 'adv-sessions';
+
+      saveAppState();
+      renderAll();
+      notify(`${finalized.length} جلسه در اطلاعات دانش‌آموز ثبت شد.`, 'success');
+    }
+
+    function handleGenerateRegTests(e) {
+      e.preventDefault();
+      const category = document.getElementById('regTstCategory').value;
+      const subject = document.getElementById('regTstSubject').value;
+      const packCount = parseInt(document.getElementById('regTstPackCount').value, 10);
+      const testCount = parseInt(document.getElementById('regTstPerPack').value, 10);
+
+      if (!packCount || packCount < 1 || packCount > 100) {
+        notify('تعداد باکس تست باید بین ۱ تا ۱۰۰ باشد.', 'warning');
+        return;
+      }
+      if (!testCount || testCount < 1) {
+        notify('تعداد تست هر باکس باید حداقل ۱ باشد.', 'warning');
+        return;
+      }
+
+      const autoMinutes = calculateAutoTestMinutes(subject, testCount);
+      const generated = [];
+      for (let i = 1; i <= packCount; i++) {
+        generated.push({
+          id: 'dtst-' + Date.now() + '-' + i + '-' + Math.random().toString(36).slice(2, 5),
+          number: i,
+          category,
+          subject,
+          testCount,
+          minutes: autoMinutes,
+          name: ''
+        });
+      }
+
+      appState.draftRegTests = generated;
+      saveAppState();
+      renderAll();
+      notify(`${packCount} باکس ${testCount} تستی با زمان ${autoMinutes} دقیقه برای هر باکس ساخته شد.`, 'success');
+    }
+
+    function updateDraftTstField(id, field, value) {
+      const item = appState.draftRegTests.find((t) => t && t.id === id);
+      if (!item) return;
+
+      if (field === 'minutes') {
+        const parsed = parseFloat(value);
+        item.minutes = Number.isNaN(parsed) || parsed < 0 ? 0 : Math.round(parsed * 10) / 10;
+        saveAppState();
+        renderRegistrationDrafts();
+        return;
+      }
+
+      item[field] = value;
+      saveAppState();
+    }
+
+    function adjustDraftTstMinutes(id, deltaMinutes) {
+      const item = appState.draftRegTests.find((t) => t && t.id === id);
+      if (!item) return;
+      const current = Number(item.minutes) || 0;
+      const updated = Math.max(0, Math.round((current + deltaMinutes) * 10) / 10);
+      item.minutes = updated;
+      saveAppState();
+      renderRegistrationDrafts();
+    }
+
+    function clearDraftTst() {
+      appState.draftRegTests = [];
+      saveAppState();
+      renderAll();
+    }
+
+    function finalizeRegTests() {
+      if (!Array.isArray(appState.draftRegTests) || appState.draftRegTests.length === 0) {
+        notify('ابتدا باکس‌های تست را بسازید.', 'warning');
+        return;
+      }
+
+      const existingCountBySubject = {};
+      appState.registeredTests.forEach((t) => {
+        if (t && t.subject) {
+          existingCountBySubject[t.subject] = (existingCountBySubject[t.subject] || 0) + 1;
+        }
+      });
+
+      const finalized = appState.draftRegTests.map((d) => {
+        const nextNum = (existingCountBySubject[d.subject] || 0) + 1;
+        existingCountBySubject[d.subject] = nextNum;
+        const minutesVal = typeof d.minutes === 'number' ? d.minutes : calculateAutoTestMinutes(d.subject, d.testCount);
+        return {
+          id: 'regtst-' + Date.now() + '-' + nextNum + '-' + Math.random().toString(36).slice(2, 6),
+          number: nextNum,
+          category: d.category,
+          subject: d.subject,
+          testCount: d.testCount,
+          minutes: minutesVal,
+          name: (d.name || '').trim() || `باکس تست ${nextNum} ${d.subject}`,
+          transferredDays: []
+        };
+      });
+
+      const firstSubject = finalized[0].subject;
+      appState.registeredTests.push(...finalized);
+      appState.draftRegTests = [];
+      appState.selectedAdvisorTstSubject = firstSubject;
+      appState.advisorSubTab = 'adv-tests';
+
+      saveAppState();
+      renderAll();
+      notify(`${finalized.length} باکس تست در اطلاعات دانش‌آموز ثبت شد.`, 'success');
+    }
+
+    function renderRegistrationDrafts() {
+      // رندر پیش‌نویس جلسات (فقط عنوان جلسه)
+      const sesCounterEl = document.getElementById('draftSesCounter');
+      const sesContainer = document.getElementById('draftSesListContainer');
+      const sesList = Array.isArray(appState.draftRegSessions) ? appState.draftRegSessions : [];
+
+      if (sesCounterEl) sesCounterEl.textContent = String(sesList.length);
+      if (sesContainer) {
+        if (sesList.length === 0) {
+          sesContainer.innerHTML = `
+            <div class="bg-darkbg-950 border border-dashed border-indigo-500/35 rounded-2xl p-6 text-center">
+              <p class="subtext-lg">
+                تعداد جلسات و ساعت هر جلسه را انتخاب کرده و دکمه ساخت جلسات را بزنید.
+              </p>
+            </div>
+          `;
+        } else {
+          sesContainer.innerHTML = sesList.map((s) => `
+            <div class="bg-darkbg-950 border border-indigo-500/35 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center gap-3.5">
+              <div class="flex items-center gap-3 shrink-0 sm:w-52">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center num-lg shrink-0 shadow">
+                  ${escapeHtml(s.number)}
+                </div>
+                <div>
+                  <div class="text-sm font-black text-white">${escapeHtml(s.subject)}</div>
+                  <div class="num-md text-sm">${escapeHtml(s.duration)} ساعت</div>
+                </div>
+              </div>
+
+              <div class="flex-1">
+                <label class="block text-xs font-bold text-white mb-1">عنوان جلسه</label>
+                <input
+                  type="text"
+                  value="${escapeHtml(s.name)}"
+                  data-draft-ses-id="${escapeHtml(s.id)}"
+                  class="draft-ses-input w-full rounded-xl bg-darkbg-900 border border-sky-500/35 px-3.5 py-2 text-sm font-bold text-white outline-none"
+                />
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+
+      // رندر پیش‌نویس تست‌ها (زمان خودکار + دکمه‌های کم/زیاد کردن و ورودی دقیقه)
+      const tstCounterEl = document.getElementById('draftTstCounter');
+      const tstContainer = document.getElementById('draftTstListContainer');
+      const tstList = Array.isArray(appState.draftRegTests) ? appState.draftRegTests : [];
+
+      if (tstCounterEl) tstCounterEl.textContent = String(tstList.length);
+      if (tstContainer) {
+        if (tstList.length === 0) {
+          tstContainer.innerHTML = `
+            <div class="bg-darkbg-950 border border-dashed border-emerald-500/35 rounded-2xl p-6 text-center">
+              <p class="subtext-lg">
+                درس، تعداد باکس و تعداد تست هر باکس را وارد کرده و دکمه ساخت باکس‌های تست را بزنید.
+              </p>
+            </div>
+          `;
+        } else {
+          tstContainer.innerHTML = tstList.map((t) => {
+            const minutesVal = typeof t.minutes === 'number' ? t.minutes : calculateAutoTestMinutes(t.subject, t.testCount);
+            return `
+              <div class="bg-darkbg-950 border border-emerald-500/35 rounded-2xl p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <div class="flex items-center gap-3 shrink-0">
+                  <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-600 flex items-center justify-center num-lg shrink-0 shadow">
+                    ${escapeHtml(t.number)}
+                  </div>
+                  <div>
+                    <div class="text-sm font-black text-white">${escapeHtml(t.subject)} • ${escapeHtml(t.testCount)} تست</div>
+                    <div class="num-md text-sm">${escapeHtml(minutesVal)} دقیقه</div>
+                  </div>
+                </div>
+
+                <div class="flex-1 max-w-md">
+                  <label class="block text-xs font-bold text-white mb-1">عنوان باکس تست</label>
+                  <input
+                    type="text"
+                    value="${escapeHtml(t.name)}"
+                    data-draft-tst-id="${escapeHtml(t.id)}"
+                    data-draft-tst-field="name"
+                    class="draft-tst-input w-full rounded-xl bg-darkbg-900 border border-cyan-500/35 px-3 py-2 text-sm font-bold text-white outline-none"
+                  />
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    data-tst-adjust-id="${escapeHtml(t.id)}"
+                    data-tst-delta="-5"
+                    class="px-3 py-2 rounded-xl bg-gradient-to-l from-rose-700 to-orange-700 hover:from-rose-600 hover:to-orange-600 border border-rose-400/40 text-xs font-black text-white transition cursor-pointer"
+                  >
+                    -۵ دقیقه
+                  </button>
+
+                  <div class="flex items-center gap-1.5">
+                    <input
+                      type="number"
+                      step="0.5"
+                      min="0"
+                      value="${escapeHtml(minutesVal)}"
+                      data-draft-tst-id="${escapeHtml(t.id)}"
+                      data-draft-tst-field="minutes"
+                      class="draft-tst-input w-24 rounded-xl bg-darkbg-900 border border-amber-500/40 px-2.5 py-2 text-center outline-none"
+                    />
+                    <span class="text-xs font-extrabold text-white">دقیقه</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    data-tst-adjust-id="${escapeHtml(t.id)}"
+                    data-tst-delta="5"
+                    class="px-3 py-2 rounded-xl bg-gradient-to-l from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-xs font-black text-white transition cursor-pointer"
+                  >
+                    +۵ دقیقه
+                  </button>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+    }
+
+    // =========================================================================
+    // بخش ۴: اطلاعات دانش‌آموز و انتقال به برنامه مطالعه
+    // =========================================================================
+    function selectAdvisorSesSubject(subject) {
+      appState.selectedAdvisorSesSubject = subject;
+      saveAppState();
+      renderAdvisorSection();
+    }
+
+    function selectAdvisorTstSubject(subject) {
+      appState.selectedAdvisorTstSubject = subject;
+      saveAppState();
+      renderAdvisorSection();
+    }
+
+    function transferSessionToStudyPlan(sessionId) {
+      const session = appState.registeredSessions.find((s) => s && s.id === sessionId);
+      if (!session) return;
+
+      const daySelect = document.getElementById('adv-ses-day-' + sessionId);
+      const chosenDay = daySelect ? daySelect.value : 'شنبه';
+
+      appState.studyPlanItems.unshift({
+        id: 'plan-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+        day: chosenDay,
+        kind: 'جلسه مطالعه',
+        subject: session.subject,
+        title: session.name,
+        amount: session.duration,
+        unit: 'ساعت',
+        durationMinutes: Math.round((Number(session.duration) || 0) * 60),
+        completed: false,
+        source: 'اطلاعات دانش‌آموز'
+      });
+
+      if (!Array.isArray(session.transferredDays)) {
+        session.transferredDays = [];
+      }
+      if (!session.transferredDays.includes(chosenDay)) {
+        session.transferredDays.push(chosenDay);
+      }
+
+      saveAppState();
+      renderAll();
+      notify(`«${session.name}» به روز ${chosenDay} منتقل شد.`, 'success');
+    }
+
+    function transferTestToStudyPlan(testId) {
+      const tst = appState.registeredTests.find((t) => t && t.id === testId);
+      if (!tst) return;
+
+      const daySelect = document.getElementById('adv-tst-day-' + testId);
+      const chosenDay = daySelect ? daySelect.value : 'شنبه';
+      const minutesVal = typeof tst.minutes === 'number' ? tst.minutes : calculateAutoTestMinutes(tst.subject, tst.testCount);
+
+      appState.studyPlanItems.unshift({
+        id: 'plan-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+        day: chosenDay,
+        kind: 'تست‌زنی',
+        subject: tst.subject,
+        title: tst.name,
+        amount: tst.testCount,
+        unit: 'تست',
+        durationMinutes: minutesVal,
+        completed: false,
+        source: 'اطلاعات دانش‌آموز'
+      });
+
+      if (!Array.isArray(tst.transferredDays)) {
+        tst.transferredDays = [];
+      }
+      if (!tst.transferredDays.includes(chosenDay)) {
+        tst.transferredDays.push(chosenDay);
+      }
+
+      saveAppState();
+      renderAll();
+      notify(`«${tst.name}» به روز ${chosenDay} منتقل شد.`, 'success');
+    }
+
+    function renderAdvisorSection() {
+      const regSes = Array.isArray(appState.registeredSessions) ? appState.registeredSessions : [];
+      const regTst = Array.isArray(appState.registeredTests) ? appState.registeredTests : [];
+
+      const sesSpecEl = document.getElementById('advisorSesSpecCards');
+      const sesGenEl = document.getElementById('advisorSesGenCards');
+      const sesAreaEl = document.getElementById('advisorSelectedSesArea');
+
+      if (sesSpecEl && sesGenEl && sesAreaEl) {
+        sesSpecEl.innerHTML = SUBJECTS_MAP['اختصاصی'].map((subj) => {
+          const active = appState.selectedAdvisorSesSubject === subj;
+          return `
+            <button
+              type="button"
+              data-adv-ses-subject="${escapeHtml(subj)}"
+              class="px-3.5 py-3 rounded-xl border text-sm font-black transition text-center cursor-pointer ${
+                active
+                  ? 'bg-gradient-to-l from-indigo-600 to-violet-600 border-indigo-300 text-white shadow-lg'
+                  : 'bg-darkbg-950 border-darkbg-700 hover:border-indigo-400 text-white'
+              }"
+            >
+              ${escapeHtml(subj)}
+            </button>
+          `;
+        }).join('');
+
+        sesGenEl.innerHTML = SUBJECTS_MAP['عمومی'].map((subj) => {
+          const active = appState.selectedAdvisorSesSubject === subj;
+          return `
+            <button
+              type="button"
+              data-adv-ses-subject="${escapeHtml(subj)}"
+              class="px-3.5 py-3 rounded-xl border text-sm font-black transition text-center cursor-pointer ${
+                active
+                  ? 'bg-gradient-to-l from-cyan-600 to-sky-600 border-cyan-300 text-white shadow-lg'
+                  : 'bg-darkbg-950 border-darkbg-700 hover:border-cyan-400 text-white'
+              }"
+            >
+              ${escapeHtml(subj)}
+            </button>
+          `;
+        }).join('');
+
+        const selectedSubj = appState.selectedAdvisorSesSubject;
+        const subjectSessions = regSes.filter((s) => s && s.subject === selectedSubj);
+
+        if (subjectSessions.length === 0) {
+          sesAreaEl.innerHTML = `
+            <div class="text-center py-6">
+              <div class="num-lg mb-2">${escapeHtml(selectedSubj)}</div>
+              <p class="subtext-lg">جلسه‌ای برای این درس ثبت نشده است.</p>
+            </div>
+          `;
+        } else {
+          sesAreaEl.innerHTML = `
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-darkbg-800">
+              <h4 class="text-lg font-black text-white">${escapeHtml(selectedSubj)} — جلسات ثبت‌شده</h4>
+              <span class="num-md text-sm bg-indigo-600/30 px-3 py-1 rounded-xl border border-indigo-400/40">
+                ${subjectSessions.length} جلسه
+              </span>
+            </div>
+
+            <div class="space-y-3">
+              ${subjectSessions.map((s) => `
+                <div class="bg-darkbg-900 border border-indigo-500/30 rounded-2xl p-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center num-lg shrink-0">
+                      ${escapeHtml(s.number)}
+                    </div>
+                    <div>
+                      <div class="text-base sm:text-lg font-black text-white">${escapeHtml(s.name)}</div>
+                      <div class="subtext-lg text-sm mt-0.5">
+                        مدت: <span class="num-md text-sm">${escapeHtml(s.duration)} ساعت</span>
+                      </div>
+                      ${Array.isArray(s.transferredDays) && s.transferredDays.length > 0 ? `
+                        <div class="mt-1 text-xs font-extrabold text-emerald-300">
+                          منتقل‌شده به برنامه: ${s.transferredDays.map(escapeHtml).join('، ')}
+                        </div>
+                      ` : ''}
+                    </div>
+                  </div>
+
+                  <div class="flex items-center gap-2 shrink-0 border-t lg:border-t-0 border-darkbg-800 pt-3 lg:pt-0">
+                    <select
+                      id="adv-ses-day-${escapeHtml(s.id)}"
+                      class="rounded-xl bg-darkbg-950 border border-indigo-500/40 px-3 py-2.5 text-sm font-extrabold text-white outline-none"
+                    >
+                      ${WEEK_DAYS.map((d) => `<option value="${d}">${d}</option>`).join('')}
+                    </select>
+
+                    <button
+                      type="button"
+                      data-transfer-ses-id="${escapeHtml(s.id)}"
+                      class="px-4 py-2.5 rounded-xl bg-gradient-to-l from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-sm font-black shadow transition whitespace-nowrap cursor-pointer"
+                    >
+                      انتقال به برنامه
+                    </button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        }
+      }
+
+      const tstSpecEl = document.getElementById('advisorTstSpecCards');
+      const tstGenEl = document.getElementById('advisorTstGenCards');
+      const tstAreaEl = document.getElementById('advisorSelectedTstArea');
+
+      if (tstSpecEl && tstGenEl && tstAreaEl) {
+        tstSpecEl.innerHTML = SUBJECTS_MAP['اختصاصی'].map((subj) => {
+          const active = appState.selectedAdvisorTstSubject === subj;
+          return `
+            <button
+              type="button"
+              data-adv-tst-subject="${escapeHtml(subj)}"
+              class="px-3.5 py-3 rounded-xl border text-sm font-black transition text-center cursor-pointer ${
+                active
+                  ? 'bg-gradient-to-l from-emerald-600 to-teal-600 border-emerald-300 text-white shadow-lg'
+                  : 'bg-darkbg-950 border-darkbg-700 hover:border-emerald-400 text-white'
+              }"
+            >
+              ${escapeHtml(subj)}
+            </button>
+          `;
+        }).join('');
+
+        tstGenEl.innerHTML = SUBJECTS_MAP['عمومی'].map((subj) => {
+          const active = appState.selectedAdvisorTstSubject === subj;
+          return `
+            <button
+              type="button"
+              data-adv-tst-subject="${escapeHtml(subj)}"
+              class="px-3.5 py-3 rounded-xl border text-sm font-black transition text-center cursor-pointer ${
+                active
+                  ? 'bg-gradient-to-l from-amber-600 to-orange-600 border-amber-300 text-white shadow-lg'
+                  : 'bg-darkbg-950 border-darkbg-700 hover:border-amber-400 text-white'
+              }"
+            >
+              ${escapeHtml(subj)}
+            </button>
+          `;
+        }).join('');
+
+        const selectedTstSubj = appState.selectedAdvisorTstSubject;
+        const subjectTests = regTst.filter((t) => t && t.subject === selectedTstSubj);
+
+        if (subjectTests.length === 0) {
+          tstAreaEl.innerHTML = `
+            <div class="text-center py-6">
+              <div class="num-lg mb-2">${escapeHtml(selectedTstSubj)}</div>
+              <p class="subtext-lg">باکس تستی برای این درس ثبت نشده است.</p>
+            </div>
+          `;
+        } else {
+          tstAreaEl.innerHTML = `
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-darkbg-800">
+              <h4 class="text-lg font-black text-white">${escapeHtml(selectedTstSubj)} — باکس‌های تست ثبت‌شده</h4>
+              <span class="num-md text-sm bg-emerald-600/30 px-3 py-1 rounded-xl border border-emerald-400/40">
+                ${subjectTests.length} باکس
+              </span>
+            </div>
+
+            <div class="space-y-3">
+              ${subjectTests.map((t) => {
+                const minutesVal = typeof t.minutes === 'number' ? t.minutes : calculateAutoTestMinutes(t.subject, t.testCount);
+                return `
+                  <div class="bg-darkbg-900 border border-emerald-500/30 rounded-2xl p-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                    <div class="flex items-center gap-3.5">
+                      <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-600 flex items-center justify-center num-lg shrink-0">
+                        ${escapeHtml(t.number)}
+                      </div>
+                      <div>
+                        <div class="text-base sm:text-lg font-black text-white">${escapeHtml(t.name)}</div>
+                        <div class="subtext-lg text-sm mt-0.5">
+                          تعداد: <span class="num-md text-sm">${escapeHtml(t.testCount)} تست</span> •
+                          زمان: <span class="num-md text-sm">${escapeHtml(minutesVal)} دقیقه</span>
+                        </div>
+                        ${Array.isArray(t.transferredDays) && t.transferredDays.length > 0 ? `
+                          <div class="mt-1 text-xs font-extrabold text-emerald-300">
+                            منتقل‌شده به برنامه: ${t.transferredDays.map(escapeHtml).join('، ')}
+                          </div>
+                        ` : ''}
+                      </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 shrink-0 border-t lg:border-t-0 border-darkbg-800 pt-3 lg:pt-0">
+                      <select
+                        id="adv-tst-day-${escapeHtml(t.id)}"
+                        class="rounded-xl bg-darkbg-950 border border-emerald-500/40 px-3 py-2.5 text-sm font-extrabold text-white outline-none"
+                      >
+                        ${WEEK_DAYS.map((d) => `<option value="${d}">${d}</option>`).join('')}
+                      </select>
+
+                      <button
+                        type="button"
+                        data-transfer-tst-id="${escapeHtml(t.id)}"
+                        class="px-4 py-2.5 rounded-xl bg-gradient-to-l from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-sm font-black shadow transition whitespace-nowrap cursor-pointer"
+                      >
+                        انتقال به برنامه
+                      </button>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          `;
+        }
+      }
+    }
+
+    // =========================================================================
+    // بخش ۵: چت دوطرفه دانش‌آموز و مشاور
+    // =========================================================================
+    function setChatRole(role) {
+      appState.chatRole = role === 'advisor' ? 'advisor' : 'user';
+      saveAppState();
+      renderChatSection();
+    }
+
+    function handleSendChatMessage(e) {
+      e.preventDefault();
+      const inputEl = document.getElementById('chatMessageInput');
+      if (!inputEl) return;
+      const text = inputEl.value.trim();
+      if (!text) return;
+
+      const senderRole = appState.chatRole === 'advisor' ? 'advisor' : 'user';
+      const nowTime = new Date().toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' });
+
+      appState.chatMessages.push({
+        id: 'msg-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+        sender: senderRole,
+        text,
+        time: nowTime
+      });
+
+      inputEl.value = '';
+      saveAppState();
+      renderTopStats();
+      renderChatSection();
+
+      const container = document.getElementById('chatMessagesContainer');
+      if (container) {
+        container.scrollTop = container.scrollHeight;
+      }
+    }
+
+    function clearChatMessages() {
+      appState.chatMessages = [];
+      saveAppState();
+      renderTopStats();
+      renderChatSection();
+      notify('تاریخچه چت پاک شد.', 'info');
+    }
+
+    function renderChatSection() {
+      const btnUser = document.getElementById('btnRoleUser');
+      const btnAdvisor = document.getElementById('btnRoleAdvisor');
+      const container = document.getElementById('chatMessagesContainer');
+
+      if (btnUser && btnAdvisor) {
+        const isAdvisor = appState.chatRole === 'advisor';
+        btnUser.className = !isAdvisor
+          ? 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-black bg-gradient-to-l from-indigo-600 to-violet-600 text-white shadow transition cursor-pointer'
+          : 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-black text-white hover:bg-darkbg-800 transition cursor-pointer';
+        btnAdvisor.className = isAdvisor
+          ? 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-black bg-gradient-to-l from-emerald-600 to-teal-600 text-white shadow transition cursor-pointer'
+          : 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-black text-white hover:bg-darkbg-800 transition cursor-pointer';
+      }
+
+      if (!container) return;
+      const messages = Array.isArray(appState.chatMessages) ? appState.chatMessages : [];
+
+      if (messages.length === 0) {
+        container.innerHTML = `
+          <div class="h-full flex flex-col items-center justify-center text-center p-6">
+            <div class="num-lg mb-1.5">گفتگویی ثبت نشده است</div>
+            <p class="subtext-lg">پیام اول را ارسال کنید.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = messages.map((m) => {
+        const isAdvisorMsg = m.sender === 'advisor';
+        return `
+          <div class="flex ${isAdvisorMsg ? 'justify-start' : 'justify-end'}">
+            <div class="chat-bubble-colorful max-w-[85%] sm:max-w-[70%] rounded-2xl border p-3.5 space-y-1.5 shadow ${
+              isAdvisorMsg
+                ? 'bg-gradient-to-br from-emerald-700/85 to-teal-800/85 border-emerald-400/50'
+                : 'bg-gradient-to-br from-indigo-700/85 to-fuchsia-800/85 border-fuchsia-400/50'
+            }">
+              <div class="flex items-center justify-between gap-4 text-xs font-black">
+                <span class="px-2.5 py-0.5 rounded-lg ${isAdvisorMsg ? 'bg-emerald-950/70 border border-emerald-300/40' : 'bg-indigo-950/70 border border-fuchsia-300/40'} text-white">
+                  ${isAdvisorMsg ? 'مشاور' : 'دانش‌آموز'}
+                </span>
+                <span class="num-md text-xs">${escapeHtml(m.time || '')}</span>
+              </div>
+              <div class="subtext-lg text-sm sm:text-base break-words">${escapeHtml(m.text)}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // =========================================================================
+    // رندر یکپارچه و اتصال رویدادها
+    // =========================================================================
+    function renderAll() {
+      try { applyMainTabView(appState.activeMainTab); } catch (err) { console.error(err); }
+      try { applyRegSubTabView(appState.regSubTab); } catch (err) { console.error(err); }
+      try { applyAdvisorSubTabView(appState.advisorSubTab); } catch (err) { console.error(err); }
+      try { renderTopStats(); } catch (err) { console.error(err); }
+      try { renderStudyPlan(); } catch (err) { console.error(err); }
+      try { renderDailyReports(); } catch (err) { console.error(err); }
+      try { renderTopicReports(); } catch (err) { console.error(err); }
+      try { renderRegistrationDrafts(); } catch (err) { console.error(err); }
+      try { renderAdvisorSection(); } catch (err) { console.error(err); }
+      try { renderChatSection(); } catch (err) { console.error(err); }
+    }
+
+    function bindAllEvents() {
+      if (eventsBound) return;
+      eventsBound = true;
+
+      const themeBtn = document.getElementById('btnToggleTheme');
+      if (themeBtn) {
+        themeBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          toggleTheme();
+        });
+      }
+
+      document.addEventListener('click', (e) => {
+        const target = e.target;
+        if (!target || typeof target.closest !== 'function') return;
+
+        const mainTabBtn = target.closest('[data-main-tab]');
+        if (mainTabBtn) {
+          e.preventDefault();
+          switchMainTab(mainTabBtn.getAttribute('data-main-tab'));
+          return;
+        }
+
+        const regSubBtn = target.closest('[data-reg-subtab]');
+        if (regSubBtn) {
+          e.preventDefault();
+          switchRegSubTab(regSubBtn.getAttribute('data-reg-subtab'));
+          return;
+        }
+
+        const advSubBtn = target.closest('[data-advisor-subtab]');
+        if (advSubBtn) {
+          e.preventDefault();
+          switchAdvisorSubTab(advSubBtn.getAttribute('data-advisor-subtab'));
+          return;
+        }
+
+        if (target.closest('#btnGoToStudentInfo')) {
+          e.preventDefault();
+          switchMainTab('advisor');
+          return;
+        }
+
+        if (target.closest('#btnJumpToStudyPlanFromTopic')) {
+          e.preventDefault();
+          switchMainTab('plan');
+          return;
+        }
+
+        const planToggleBtn = target.closest('[data-plan-toggle]');
+        if (planToggleBtn) {
+          togglePlanCompleted(planToggleBtn.getAttribute('data-plan-toggle'));
+          return;
+        }
+
+        const planDeleteBtn = target.closest('[data-plan-delete]');
+        if (planDeleteBtn) {
+          removePlanItem(planDeleteBtn.getAttribute('data-plan-delete'));
+          return;
+        }
+
+        const reportDeleteBtn = target.closest('[data-report-delete]');
+        if (reportDeleteBtn) {
+          deleteReport(reportDeleteBtn.getAttribute('data-report-delete'));
+          return;
+        }
+
+        const topicSaveBtn = target.closest('[data-topic-save]');
+        if (topicSaveBtn) {
+          confirmTopicReport(topicSaveBtn.getAttribute('data-topic-save'));
+          return;
+        }
+
+        const topicUndoBtn = target.closest('[data-topic-undo]');
+        if (topicUndoBtn) {
+          unmarkTopicReportPlan(topicUndoBtn.getAttribute('data-topic-undo'));
+          return;
+        }
+
+        const tstAdjustBtn = target.closest('[data-tst-adjust-id]');
+        if (tstAdjustBtn) {
+          const id = tstAdjustBtn.getAttribute('data-tst-adjust-id');
+          const delta = parseFloat(tstAdjustBtn.getAttribute('data-tst-delta')) || 0;
+          adjustDraftTstMinutes(id, delta);
+          return;
+        }
+
+        const sesSubjBtn = target.closest('[data-adv-ses-subject]');
+        if (sesSubjBtn) {
+          selectAdvisorSesSubject(sesSubjBtn.getAttribute('data-adv-ses-subject'));
+          return;
+        }
+
+        const tstSubjBtn = target.closest('[data-adv-tst-subject]');
+        if (tstSubjBtn) {
+          selectAdvisorTstSubject(tstSubjBtn.getAttribute('data-adv-tst-subject'));
+          return;
+        }
+
+        const transferSesBtn = target.closest('[data-transfer-ses-id]');
+        if (transferSesBtn) {
+          transferSessionToStudyPlan(transferSesBtn.getAttribute('data-transfer-ses-id'));
+          return;
+        }
+
+        const transferTstBtn = target.closest('[data-transfer-tst-id]');
+        if (transferTstBtn) {
+          transferTestToStudyPlan(transferTstBtn.getAttribute('data-transfer-tst-id'));
+          return;
+        }
+
+        const roleBtn = target.closest('[data-chat-role]');
+        if (roleBtn) {
+          setChatRole(roleBtn.getAttribute('data-chat-role'));
+          return;
+        }
+
+        if (target.closest('#btnClearChat')) {
+          clearChatMessages();
+        }
+      });
+
+      const planDayFilter = document.getElementById('planDayFilter');
+      if (planDayFilter) planDayFilter.addEventListener('change', renderStudyPlan);
+
+      const topicDayFilter = document.getElementById('topicReportDayFilter');
+      if (topicDayFilter) topicDayFilter.addEventListener('change', renderTopicReports);
+
+      const regSesCategory = document.getElementById('regSesCategory');
+      if (regSesCategory) {
+        regSesCategory.addEventListener('change', () => {
+          syncSubjectOptions('regSesCategory', 'regSesSubject', 'regSesDuration');
+        });
+      }
+
+      const regTstCategory = document.getElementById('regTstCategory');
+      if (regTstCategory) {
+        regTstCategory.addEventListener('change', () => {
+          syncSubjectOptions('regTstCategory', 'regTstSubject', null);
+        });
+      }
+
+      const formManualPlan = document.getElementById('formAddManualPlan');
+      if (formManualPlan) formManualPlan.addEventListener('submit', handleAddManualPlan);
+
+      const formReport = document.getElementById('formAddReport');
+      if (formReport) formReport.addEventListener('submit', handleAddReport);
+
+      const formGenSes = document.getElementById('formGenerateRegSessions');
+      if (formGenSes) formGenSes.addEventListener('submit', handleGenerateRegSessions);
+
+      const btnFinSes = document.getElementById('btnFinalizeRegSessions');
+      if (btnFinSes) btnFinSes.addEventListener('click', finalizeRegSessions);
+
+      const btnClearSes = document.getElementById('btnClearDraftSes');
+      if (btnClearSes) btnClearSes.addEventListener('click', clearDraftSes);
+
+      const formGenTst = document.getElementById('formGenerateRegTests');
+      if (formGenTst) formGenTst.addEventListener('submit', handleGenerateRegTests);
+
+      const btnFinTst = document.getElementById('btnFinalizeRegTests');
+      if (btnFinTst) btnFinTst.addEventListener('click', finalizeRegTests);
+
+      const btnClearTst = document.getElementById('btnClearDraftTst');
+      if (btnClearTst) btnClearTst.addEventListener('click', clearDraftTst);
+
+      const formChat = document.getElementById('formSendChatMessage');
+      if (formChat) formChat.addEventListener('submit', handleSendChatMessage);
+
+      document.addEventListener('input', (e) => {
+        const target = e.target;
+        if (!target || typeof target.closest !== 'function') return;
+
+        const sesInput = target.closest('.draft-ses-input');
+        if (sesInput) {
+          updateDraftSesName(sesInput.getAttribute('data-draft-ses-id'), sesInput.value);
+          return;
+        }
+
+        const tstInput = target.closest('.draft-tst-input');
+        if (tstInput) {
+          updateDraftTstField(
+            tstInput.getAttribute('data-draft-tst-id'),
+            tstInput.getAttribute('data-draft-tst-field'),
+            tstInput.value
+          );
+          return;
+        }
+
+        const topicInput = target.closest('.topic-report-input');
+        if (topicInput) {
+          updateTopicReportField(
+            topicInput.getAttribute('data-topic-id'),
+            topicInput.getAttribute('data-topic-field'),
+            topicInput.value
+          );
+        }
+      });
+    }
+
+    function initApp() {
+      syncSubjectOptions('regSesCategory', 'regSesSubject', 'regSesDuration');
+      syncSubjectOptions('regTstCategory', 'regTstSubject', null);
+      loadTheme();
+      loadAppState();
+      bindAllEvents();
+      renderAll();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initApp);
+    } else {
+      initApp();
+    }
+  </script>
+</body>
+</html>

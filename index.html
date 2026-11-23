@@ -226,16 +226,16 @@
   <!-- اعلان‌های غیرمسدودکننده -->
   <div id="toastRoot" class="fixed top-4 left-4 right-4 sm:left-6 sm:right-auto sm:w-96 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-  <!-- هدر و نوار ناوبری اصلی -->
+  <!-- هدر و نوار ناوبری اصلی (بدون لوگو و با چیدمان دو ردیفه جادار بدون روی‌هم‌افتادگی) -->
   <header class="sticky top-0 z-40 bg-darkbg-900/95 backdrop-blur-md border-b border-indigo-500/30 shadow-xl">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3.5 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3">
-      <div class="flex items-center justify-between gap-2 shrink-0">
-        <!-- دکمه‌های خروجی/ورود JSON و تغییر حالت روشن / تاریک -->
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex flex-col gap-2.5">
+      <!-- ردیف اول: دکمه‌های خروجی/ورود JSON و تغییر حالت روشن / تاریک -->
+      <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-darkbg-800/80">
         <div class="flex flex-wrap items-center gap-2">
           <button
             type="button"
             id="btnExportJson"
-            class="px-3 py-2 rounded-xl border border-emerald-400/40 bg-gradient-to-l from-emerald-600/30 to-teal-600/30 hover:from-emerald-600/50 hover:to-teal-600/50 text-xs sm:text-sm font-extrabold text-white transition flex items-center gap-1.5 cursor-pointer"
+            class="px-3.5 py-2 rounded-xl border border-emerald-400/40 bg-gradient-to-l from-emerald-600/30 to-teal-600/30 hover:from-emerald-600/50 hover:to-teal-600/50 text-xs sm:text-sm font-extrabold text-white transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
           >
             <span>⬇️</span>
             <span>خروجی JSON</span>
@@ -243,7 +243,7 @@
 
           <label
             for="inputImportJson"
-            class="px-3 py-2 rounded-xl border border-sky-400/40 bg-gradient-to-l from-sky-600/30 to-cyan-600/30 hover:from-sky-600/50 hover:to-cyan-600/50 text-xs sm:text-sm font-extrabold text-white transition flex items-center gap-1.5 cursor-pointer"
+            class="px-3.5 py-2 rounded-xl border border-sky-400/40 bg-gradient-to-l from-sky-600/30 to-cyan-600/30 hover:from-sky-600/50 hover:to-cyan-600/50 text-xs sm:text-sm font-extrabold text-white transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
           >
             <span>⬆️</span>
             <span>ورود JSON</span>
@@ -254,25 +254,25 @@
             accept="application/json,.json"
             class="hidden"
           />
-
-          <button
-            type="button"
-            id="btnToggleTheme"
-            aria-label="تغییر حالت روشن و تاریک"
-            class="px-3.5 py-2 rounded-xl border border-amber-400/40 bg-gradient-to-l from-amber-600/30 to-rose-600/30 hover:from-amber-600/50 hover:to-rose-600/50 text-xs sm:text-sm font-extrabold text-white transition flex items-center gap-2 cursor-pointer shrink-0"
-          >
-            <span id="themeIcon">☀️</span>
-            <span id="themeLabel">حالت روشن</span>
-          </button>
         </div>
+
+        <button
+          type="button"
+          id="btnToggleTheme"
+          aria-label="تغییر حالت روشن و تاریک"
+          class="px-3.5 py-2 rounded-xl border border-amber-400/40 bg-gradient-to-l from-amber-600/30 to-rose-600/30 hover:from-amber-600/50 hover:to-rose-600/50 text-xs sm:text-sm font-extrabold text-white transition flex items-center gap-2 cursor-pointer whitespace-nowrap"
+        >
+          <span id="themeIcon">☀️</span>
+          <span id="themeLabel">حالت روشن</span>
+        </button>
       </div>
 
-      <!-- ۵ تب اصلی ناوبری (plan, report, register, advisor, chat) -->
-      <nav id="mainNavContainer" aria-label="بخش‌های اصلی" class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+      <!-- ردیف دوم: ۵ تب اصلی ناوبری با فضای کامل در کل عرض هدر -->
+      <nav id="mainNavContainer" aria-label="بخش‌های اصلی" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 w-full">
         <button
           type="button"
           data-main-tab="plan"
-          class="main-tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition flex items-center justify-center gap-2 cursor-pointer"
+          class="main-tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
         >
           <span>۱. برنامه مطالعه</span>
           <span id="navCountPlan" class="num-md bg-indigo-600 px-2 py-0.5 rounded-lg text-xs">0</span>
@@ -281,7 +281,7 @@
         <button
           type="button"
           data-main-tab="report"
-          class="main-tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition flex items-center justify-center gap-2 cursor-pointer"
+          class="main-tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
         >
           <span>۲. گزارش کار</span>
           <span id="navCountReports" class="num-md bg-emerald-600 px-2 py-0.5 rounded-lg text-xs">0</span>
@@ -290,7 +290,7 @@
         <button
           type="button"
           data-main-tab="register"
-          class="main-tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition flex items-center justify-center gap-2 cursor-pointer"
+          class="main-tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
         >
           <span>۳. ثبت</span>
           <span id="navCountReg" class="num-md bg-sky-600 px-2 py-0.5 rounded-lg text-xs">0</span>
@@ -299,7 +299,7 @@
         <button
           type="button"
           data-main-tab="advisor"
-          class="main-tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition flex items-center justify-center gap-2 cursor-pointer"
+          class="main-tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
         >
           <span>۴. اطلاعات دانش‌آموز</span>
           <span id="navCountAdvisor" class="num-md bg-amber-600 px-2 py-0.5 rounded-lg text-xs">0</span>
@@ -308,7 +308,7 @@
         <button
           type="button"
           data-main-tab="chat"
-          class="main-tab-btn col-span-2 sm:col-span-1 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition flex items-center justify-center gap-2 cursor-pointer"
+          class="main-tab-btn col-span-2 sm:col-span-1 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold border transition flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
         >
           <span>۵. چت</span>
           <span id="navCountChat" class="num-md bg-fuchsia-600 px-2 py-0.5 rounded-lg text-xs">0</span>
